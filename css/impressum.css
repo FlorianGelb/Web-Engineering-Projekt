@@ -1,0 +1,22 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    height: 100%;
+    }
+    
+    .leftDiv { 
+        grid-area: 1 / 1 / 2 / 2; 
+        border: 1px solid black;
+        height: 100%;
+        background: #eee;
+    }
+    .rightDiv { 
+        grid-area: 1 / 2 / 2 / 3; 
+        border: 1px solid black;
+        height: 100%;
+        background: #eee;
+    }
+    }
