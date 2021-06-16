@@ -1,7 +1,6 @@
 .container {
-    margin-top: 30px;
-    height: 1300px;
-    
+    margin-top: 50px;
+    height: 1200px;
     text-align: center;
     padding-bottom: 120px;
 
@@ -28,17 +27,21 @@ margin-left: auto;
 }
 .footer-container {
 padding: 40px;
-height: 200px;
+height: 250px;
 background-color: #333333;
 }
 
 .contact {
     float: left;
-    width: 50%;
+    width: 33%;
 }
 .stammbaum {
     float: left;
-  width: 50%;
+  width: 33%;
+}
+.team {
+    float: left;
+  width: 33%;
 }
 * {
     box-sizing: border-box;
