@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE familie [
+<!ELEMENT familie (generation)>
+<!ELEMENT generation (Frau | Mann | generation)>
+<!ELEMENT Mann EMPTY>
+<!ATTLIST  Mann 
+    vorname CDATA #REQUIRED
+    nachname CDATA #REQUIRED
+    geburtsdatum CDATA #REQUIRED
+    geburtsort CDATA #REQUIRED
+    todesdatum CDATA #IMPLIED
+    ehepartner CDATA #IMPLIED
+    mutter CDATA #IMPLIED
+    vater CDATA #IMPLIED
+    id CDATA #REQUIRED
+    familyId CDATA #IMPLIED
+>
+<!ELEMENT Frau EMPTY>
+<!ATTLIST  Frau 
+    vorname CDATA #REQUIRED
+    nachname CDATA #REQUIRED
+    geburtsdatum CDATA #REQUIRED
+    geburtsort CDATA #REQUIRED
+    todesdatum CDATA #IMPLIED
+    ehepartner CDATA #IMPLIED
+    mutter CDATA #IMPLIED
+    vater CDATA #IMPLIED
+    id CDATA #REQUIRED
+    familyId CDATA #IMPLIED
+>
+]>
 <familie>
     <generation>
         <Frau vorname="Alexandra" nachname="Ewing" geburtsdatum="15-01-36" geburtsort="Laken" todesdatum="" ehepartner="" mutter="16" vater="15" id="54" familyId=""/>
