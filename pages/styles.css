@@ -1,0 +1,81 @@
+.container {
+  margin-top: 50px;
+  height: 1200px;
+  text-align: center;
+  padding-bottom: 120px;
+}
+
+.text {
+  height: 200px;
+  padding-top: 50px;
+}
+footer {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #292929;
+  color: white;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+}
+.footer-container {
+  padding: 40px;
+  height: 250px;
+  background-color: #333333;
+}
+
+.contact {
+  float: left;
+  width: 33%;
+}
+.stammbaum {
+  float: left;
+  width: 33%;
+}
+.team {
+  float: left;
+  width: 33%;
+}
+* {
+  box-sizing: border-box;
+}
+.copyright {
+  padding: 40px;
+}
+a {
+  text-decoration: none !important;
+  color: darkgrey;
+}
+
+.navbar {
+  position: fixed !important;
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  top: 0;
+}
+
+.navbar li {
+  float: left;
+}
+
+.navbar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #04aa6d;
+}
