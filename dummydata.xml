@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE familie [
 <!ELEMENT familie (generation)>
-<!ELEMENT generation (Frau | Mann | generation)>
+<!ELEMENT generation (Frau | Mann | generation)*>
 <!ELEMENT Mann EMPTY>
 <!ATTLIST  Mann 
     vorname CDATA #REQUIRED
