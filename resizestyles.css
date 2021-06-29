@@ -1,3 +1,7 @@
+:root {
+    --sizeofwindow: 500px;
+}
+
 html, body {
             height: 100%;
             margin: 0;
@@ -12,8 +16,8 @@ html, body {
 }
 
 .container {
-    height: 300px;
-    width: 300px;
+    height: var(--sizeofwindow);
+    width: var(--sizeofwindow);
     overflow: hidden;
     border: solid #000;
     border-radius: 5px;
@@ -21,12 +25,11 @@ html, body {
 }
 
 .resize {
-    /* top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-    height: 280px;
-    width: 280px;
-    padding: 10px;
+    top: -100px;
+    left: -100px;
+    /* transform: translate(-50%, -50%); */
+    height: calc(var(--sizeofwindow) + 200px);
+    width: calc(var(--sizeofwindow) + 200px);
     background-color: burlywood;
     resize: both;
     position: relative;
@@ -64,8 +67,8 @@ html, body {
     height: 10%;
 }
 .e5 {
-    top: 50%;
-    left: 50%;
+    top: calc(50% - 5px);
+    left: calc(50% - 5px);
     width: 10%;
     height: 10%;
     transform: translate(-50%, -50%);

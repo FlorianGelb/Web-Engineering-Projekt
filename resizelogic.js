@@ -1,5 +1,7 @@
-const maxsize = 800;
-const minsize = 280;
+const maxsize = 1000;
+const minsize = 500;
+
+document.documentElement.style.setProperty("--sizeofwindow", minsize+"px");
 
 const resize = document.querySelector(".resize");
 
