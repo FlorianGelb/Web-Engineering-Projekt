@@ -27,22 +27,27 @@ function mousedown(event) {
         height = parseInt(document.defaultView.getComputedStyle(resize).height);
         width = parseInt(document.defaultView.getComputedStyle(resize).width);
 
-        if (startTop > 0){
-            startTop = 0
-        }
-        else if (startTop < minsize - height) {
-            startTop = minsize - height;
-        }
-
-        if (startLeft > 0) {
-            startLeft = 0;
-        }
-        else if (startLeft < minsize - width) {
-            startLeft = minsize - width;
-        }
-
         resize.style.left = startLeft - newX + "px";
         resize.style.top = startTop - newY + "px";
+
+        newWidth = parseInt(document.defaultView.getComputedStyle(resize).width);
+        newHeight = parseInt(document.defaultView.getComputedStyle(resize).height);
+        newTop = parseInt(document.defaultView.getComputedStyle(resize).top);
+        newLeft = parseInt(document.defaultView.getComputedStyle(resize).left);
+
+        if (newTop > 0) {
+            resize.style.top = 0 + 'px';
+        }
+        else if (newTop < minsize - newHeight) {
+            resize.style.top = (minsize - newHeight) + 'px';
+        }
+
+        if (newLeft > 0) {
+            resize.style.left = 0 + 'px';
+        }
+        else if (newLeft < minsize - newWidth) {
+            resize.style.left = (minsize - newWidth) + 'px';
+        }
 
         prevX = event.clientX;
         prevY = event.clientY;
@@ -65,21 +70,6 @@ function scrollevent(event) {
 
     var relativeXPosition = (position.x) / startWidth;
     var relativeYPosition = (position.y) / startHeight;
-
-
-    // if (startTop > 0) {
-    //     startTop = -5;
-    // }
-    // else if (startTop < minsize - startHeight) {
-    //     startTop = minsize - startHeight + 5;
-    // }
-
-    // if (startLeft > 0) {
-    //     startLeft = -5;
-    // }
-    // else if (startLeft < minsize - startWidth) {
-    //     startLeft = minsize - startWidth + 5;
-    // }
 
     if (!checkScrollDirectionIsUp(event)) {
         console.log('UP');
