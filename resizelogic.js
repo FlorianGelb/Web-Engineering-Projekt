@@ -60,25 +60,28 @@ function scrollevent(event) {
     startHeight = parseInt(document.defaultView.getComputedStyle(resize).height);
     startTop = parseInt(document.defaultView.getComputedStyle(resize).top);
     startLeft = parseInt(document.defaultView.getComputedStyle(resize).left);
-    height = parseInt(document.defaultView.getComputedStyle(resize).height);
-    width = parseInt(document.defaultView.getComputedStyle(resize).width);
+
+    var position = getRelativeCoordinates(event, resize);
+
+    var relativeXPosition = (position.x) / startWidth;
+    var relativeYPosition = (position.y) / startHeight;
 
 
-    if (startTop > 0) {
-        startTop = -5
-    }
-    else if (startTop < minsize - height) {
-        startTop = minsize - height + 5;
-    }
+    // if (startTop > 0) {
+    //     startTop = -5;
+    // }
+    // else if (startTop < minsize - startHeight) {
+    //     startTop = minsize - startHeight + 5;
+    // }
 
-    if (startLeft > 0) {
-        startLeft = -5;
-    }
-    else if (startLeft < minsize - width) {
-        startLeft = minsize - width + 5;
-    }
+    // if (startLeft > 0) {
+    //     startLeft = -5;
+    // }
+    // else if (startLeft < minsize - startWidth) {
+    //     startLeft = minsize - startWidth + 5;
+    // }
 
-    if (checkScrollDirectionIsUp(event)) {
+    if (!checkScrollDirectionIsUp(event)) {
         console.log('UP');
         if (startHeight <= minsize || startWidth <= minsize){
             return;
@@ -88,6 +91,8 @@ function scrollevent(event) {
         resize.style.left = (startLeft + 5) + 'px';
         resize.style.height = (startHeight - 10) + 'px';
         resize.style.width = (startWidth - 10) + 'px';
+
+
         
     } else {
         console.log('Down');
@@ -100,7 +105,60 @@ function scrollevent(event) {
         resize.style.height = (startHeight + 10) + 'px';
         resize.style.width = (startWidth + 10) + 'px';
     }
-    
+
+    newWidth = parseInt(document.defaultView.getComputedStyle(resize).width);
+    newHeight = parseInt(document.defaultView.getComputedStyle(resize).height);
+    newTop = parseInt(document.defaultView.getComputedStyle(resize).top);
+    newLeft = parseInt(document.defaultView.getComputedStyle(resize).left);
+
+    var newPosition = getRelativeCoordinates(event, resize);
+
+    var Xoffset = parseInt(newPosition.x - (relativeXPosition * newWidth));
+    var Yoffset = parseInt(newPosition.y - (relativeYPosition * newHeight));
+
+    resize.style.left = (newLeft + Xoffset) + 'px';
+    resize.style.top = (newTop + Yoffset) + 'px';
+
+    if (newTop > 0) {
+        resize.style.top = 0 + 'px';
+    }
+    else if (newTop < minsize - newHeight) {
+        resize.style.top = (minsize - newHeight) + 'px';
+    }
+
+    if (newLeft > 0) {
+        resize.style.left = 0 + 'px';
+    }
+    else if (newLeft < minsize - newWidth) {
+        resize.style.left = (minsize - newWidth) + 'px';
+    }
+}
+
+function getRelativeCoordinates(event, referenceElement) {
+
+    const position = {
+        x: event.pageX,
+        y: event.pageY
+    };
+
+    const offset = {
+        left: referenceElement.offsetLeft,
+        top: referenceElement.offsetTop
+    };
+
+    let reference = referenceElement.offsetParent;
+
+    while (reference) {
+        offset.left += reference.offsetLeft;
+        offset.top += reference.offsetTop;
+        reference = reference.offsetParent;
+    }
+
+    return {
+        x: position.x - offset.left,
+        y: position.y - offset.top,
+    };
+
 }
 
 function checkScrollDirectionIsUp(event) {
