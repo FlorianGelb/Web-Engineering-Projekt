@@ -1,5 +1,6 @@
 const maxsize = 1000;
 const minsize = 500;
+const scaleFactor = 10; // minsize muss durch scaleFactor teilbar sein
 
 document.documentElement.style.setProperty("--sizeofwindow", minsize+"px");
 
@@ -77,10 +78,10 @@ function scrollevent(event) {
             return;
         }
 
-        resize.style.top = (startTop + 5) + 'px';
-        resize.style.left = (startLeft + 5) + 'px';
-        resize.style.height = (startHeight - 10) + 'px';
-        resize.style.width = (startWidth - 10) + 'px';
+        resize.style.top = (startTop + scaleFactor*0.5) + 'px';
+        resize.style.left = (startLeft + scaleFactor*0.5) + 'px';
+        resize.style.height = (startHeight - scaleFactor) + 'px';
+        resize.style.width = (startWidth - scaleFactor) + 'px';
 
 
         
@@ -90,10 +91,10 @@ function scrollevent(event) {
             return;
         }
 
-        resize.style.top = (startTop - 5) + 'px';
-        resize.style.left = (startLeft - 5) + 'px';
-        resize.style.height = (startHeight + 10) + 'px';
-        resize.style.width = (startWidth + 10) + 'px';
+        resize.style.top = (startTop - scaleFactor*0.5) + 'px';
+        resize.style.left = (startLeft - scaleFactor*0.5) + 'px';
+        resize.style.height = (startHeight + scaleFactor) + 'px';
+        resize.style.width = (startWidth + scaleFactor) + 'px';
     }
 
     newWidth = parseInt(document.defaultView.getComputedStyle(resize).width);
