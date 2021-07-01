@@ -1,6 +1,6 @@
-:root {
+/* :root {
     --sizeofwindow: 500px;
-}
+} */
 
 html, body {
             height: 100%;
@@ -11,13 +11,14 @@ html, body {
     margin:0px;
     height: 100%;
     width: 100%;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .container {
-    height: var(--sizeofwindow);
-    width: var(--sizeofwindow);
+    height: 500px;
+    width: 500px;
     overflow: hidden;
     border: solid #000;
     border-radius: 5px;
@@ -25,11 +26,11 @@ html, body {
 }
 
 .resize {
-    top: -100px;
-    left: -100px;
     /* transform: translate(-50%, -50%); */
-    height: calc(var(--sizeofwindow) + 200px);
-    width: calc(var(--sizeofwindow) + 200px);
+    top: 0px;
+    left: 0px;
+    height: 500px;
+    width: 500px;
     background-color: burlywood;
     resize: both;
     position: relative;

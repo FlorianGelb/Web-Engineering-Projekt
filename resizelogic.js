@@ -2,18 +2,26 @@ const maxsize = 1000;
 const minsize = 500;
 const scaleFactor = 10; // minsize muss durch scaleFactor teilbar sein
 
-document.documentElement.style.setProperty("--sizeofwindow", minsize+"px");
-
 const resize = document.querySelector(".resize");
 
-resize.addEventListener("wheel", scrollevent);
-resize.addEventListener("mousedown", mousedown);
+if (resize.addEventListener) {
+    resize.addEventListener("wheel", scrollevent);
+    resize.addEventListener("mousedown", mousedown);
+}
+else {
+    resize.onwheel = scrollevent;
+    resize.attachEvent("onmousedown", mousedown);
+}
 
 function mousedown(event) {
-    window.addEventListener("mousemove", mousemove);
-    window.addEventListener("mouseup", mouseup);
-
-    console.log("event");
+    if (resize.addEventListener) {
+        window.addEventListener("mousemove", mousemove);
+        window.addEventListener("mouseup", mouseup);
+    }
+    else {
+        window.attachEvent("onmousemove", mousemove);
+        window.attachEvent("onmouseup", mouseup);
+    }
 
     let prevX = event.clientX;
     let prevY = event.clientY;
@@ -55,9 +63,16 @@ function mousedown(event) {
     }
 
     function mouseup() {
-        window.removeEventListener("mousemove", mousemove);
-        console.log("up");
-        window.removeEventListener("mouseup", mouseup);
+        if (window.removeEventListener) {
+            window.removeEventListener("mousemove", mousemove);
+            window.removeEventListener("mouseup", mouseup);
+        }
+        else {
+            if(window.detachEvent){
+                window.detachEvent("onmousemove", mousemove);
+                window.detachEvent("onmouseup", mouseup);
+            }
+        }
     }
 }
 
@@ -73,26 +88,24 @@ function scrollevent(event) {
     var relativeYPosition = (position.y) / startHeight;
 
     if (!checkScrollDirectionIsUp(event)) {
-        console.log('UP');
-        if (startHeight <= minsize || startWidth <= minsize){
+        if (startHeight <= minsize || startWidth <= minsize) {
             return;
         }
 
-        resize.style.top = (startTop + scaleFactor*0.5) + 'px';
-        resize.style.left = (startLeft + scaleFactor*0.5) + 'px';
+        resize.style.top = (startTop + scaleFactor * 0.5) + 'px';
+        resize.style.left = (startLeft + scaleFactor * 0.5) + 'px';
         resize.style.height = (startHeight - scaleFactor) + 'px';
         resize.style.width = (startWidth - scaleFactor) + 'px';
 
 
-        
+
     } else {
-        console.log('Down');
         if (startHeight >= maxsize || startWidth >= maxsize) {
             return;
         }
 
-        resize.style.top = (startTop - scaleFactor*0.5) + 'px';
-        resize.style.left = (startLeft - scaleFactor*0.5) + 'px';
+        resize.style.top = (startTop - scaleFactor * 0.5) + 'px';
+        resize.style.left = (startLeft - scaleFactor * 0.5) + 'px';
         resize.style.height = (startHeight + scaleFactor) + 'px';
         resize.style.width = (startWidth + scaleFactor) + 'px';
     }
