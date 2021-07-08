@@ -4,6 +4,28 @@ const scaleFactor = 10; // minsize muss durch scaleFactor teilbar sein
 
 const resize = document.querySelector(".resize");
 
+var children = resize.children;
+
+for (var i=0; i<children.length; i++){
+    var element = children.item(i);
+    var originWidth = parseInt(document.defaultView.getComputedStyle(resize).width);
+    var originHeight = parseInt(document.defaultView.getComputedStyle(resize).height);
+
+    console.log(originWidth, originHeight);
+
+    var elementWidth = parseInt(document.defaultView.getComputedStyle(element).width);
+    var elementHeight = parseInt(document.defaultView.getComputedStyle(element).height);
+    var elementTop = parseInt(document.defaultView.getComputedStyle(element).top);
+    var elementLeft = parseInt(document.defaultView.getComputedStyle(element).left);
+
+    console.log(elementWidth, elementHeight, elementTop, elementLeft);
+
+    element.style.width = (elementWidth / originWidth)*100 + '%';
+    element.style.height = (elementHeight / originHeight) * 100 + '%';
+    element.style.top = (elementTop / originHeight) * 100 + '%';
+    element.style.left = (elementLeft / originWidth) * 100 + '%';
+}
+
 if (resize.addEventListener) {
     resize.addEventListener("wheel", scrollevent);
     resize.addEventListener("mousedown", mousedown);
@@ -30,19 +52,16 @@ function mousedown(event) {
         let newX = prevX - event.clientX;
         let newY = prevY - event.clientY;
 
-        startTop = parseInt(document.defaultView.getComputedStyle(resize).top);
-        startLeft = parseInt(document.defaultView.getComputedStyle(resize).left);
-
-        height = parseInt(document.defaultView.getComputedStyle(resize).height);
-        width = parseInt(document.defaultView.getComputedStyle(resize).width);
+        var startTop = parseInt(document.defaultView.getComputedStyle(resize).top);
+        var startLeft = parseInt(document.defaultView.getComputedStyle(resize).left);
 
         resize.style.left = startLeft - newX + "px";
         resize.style.top = startTop - newY + "px";
 
-        newWidth = parseInt(document.defaultView.getComputedStyle(resize).width);
-        newHeight = parseInt(document.defaultView.getComputedStyle(resize).height);
-        newTop = parseInt(document.defaultView.getComputedStyle(resize).top);
-        newLeft = parseInt(document.defaultView.getComputedStyle(resize).left);
+        var newWidth = parseInt(document.defaultView.getComputedStyle(resize).width);
+        var newHeight = parseInt(document.defaultView.getComputedStyle(resize).height);
+        var newTop = parseInt(document.defaultView.getComputedStyle(resize).top);
+        var newLeft = parseInt(document.defaultView.getComputedStyle(resize).left);
 
         if (newTop > 0) {
             resize.style.top = 0 + 'px';
@@ -77,10 +96,10 @@ function mousedown(event) {
 }
 
 function scrollevent(event) {
-    startWidth = parseInt(document.defaultView.getComputedStyle(resize).width);
-    startHeight = parseInt(document.defaultView.getComputedStyle(resize).height);
-    startTop = parseInt(document.defaultView.getComputedStyle(resize).top);
-    startLeft = parseInt(document.defaultView.getComputedStyle(resize).left);
+    var startWidth = parseInt(document.defaultView.getComputedStyle(resize).width);
+    var startHeight = parseInt(document.defaultView.getComputedStyle(resize).height);
+    var startTop = parseInt(document.defaultView.getComputedStyle(resize).top);
+    var startLeft = parseInt(document.defaultView.getComputedStyle(resize).left);
 
     var position = getRelativeCoordinates(event, resize);
 
@@ -110,10 +129,10 @@ function scrollevent(event) {
         resize.style.width = (startWidth + scaleFactor) + 'px';
     }
 
-    newWidth = parseInt(document.defaultView.getComputedStyle(resize).width);
-    newHeight = parseInt(document.defaultView.getComputedStyle(resize).height);
-    newTop = parseInt(document.defaultView.getComputedStyle(resize).top);
-    newLeft = parseInt(document.defaultView.getComputedStyle(resize).left);
+    var newWidth = parseInt(document.defaultView.getComputedStyle(resize).width);
+    var newHeight = parseInt(document.defaultView.getComputedStyle(resize).height);
+    var newTop = parseInt(document.defaultView.getComputedStyle(resize).top);
+    var newLeft = parseInt(document.defaultView.getComputedStyle(resize).left);
 
     var newPosition = getRelativeCoordinates(event, resize);
 
