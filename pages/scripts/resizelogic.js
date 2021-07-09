@@ -1,17 +1,30 @@
-const maxsize = 1000;
-const minsize = 500;
+const maxsize = 3000;
+const minsize = 900;
 const scaleFactor = 10; // minsize muss durch scaleFactor teilbar sein
 
 const resize = document.querySelector(".resize");
 
 var children = resize.children;
 
+var scaleSize = 0;
+
 for (var i=0; i<children.length; i++){
     var element = children.item(i);
-    var originWidth = parseInt(document.defaultView.getComputedStyle(resize).width);
-    var originHeight = parseInt(document.defaultView.getComputedStyle(resize).height);
+    var elementWidth = parseInt(document.defaultView.getComputedStyle(element).width);
+    var elementHeight = parseInt(document.defaultView.getComputedStyle(element).height);
+    var elementTop = parseInt(document.defaultView.getComputedStyle(element).top);
+    var elementLeft = parseInt(document.defaultView.getComputedStyle(element).left);
 
-    console.log(originWidth, originHeight);
+    if (elementWidth + elementLeft > scaleSize){
+        scaleSize = elementWidth + elementLeft;
+    }
+    if (elementHeight + elementTop > scaleSize){
+        scaleSize = elementWidth + elementLeft;
+    }
+}
+
+for (var i=0; i<children.length; i++){
+    var element = children.item(i);
 
     var elementWidth = parseInt(document.defaultView.getComputedStyle(element).width);
     var elementHeight = parseInt(document.defaultView.getComputedStyle(element).height);
@@ -20,10 +33,10 @@ for (var i=0; i<children.length; i++){
 
     console.log(elementWidth, elementHeight, elementTop, elementLeft);
 
-    element.style.width = (elementWidth / originWidth)*100 + '%';
-    element.style.height = (elementHeight / originHeight) * 100 + '%';
-    element.style.top = (elementTop / originHeight) * 100 + '%';
-    element.style.left = (elementLeft / originWidth) * 100 + '%';
+    element.style.width = (elementWidth / scaleSize)*100 + '%';
+    element.style.height = (elementHeight / scaleSize) * 100 + '%';
+    element.style.top = (elementTop / scaleSize) * 100 + '%';
+    element.style.left = (elementLeft / scaleSize) * 100 + '%';
 }
 
 if (resize.addEventListener) {
@@ -96,6 +109,8 @@ function mousedown(event) {
 }
 
 function scrollevent(event) {
+    event.preventDefault();
+
     var startWidth = parseInt(document.defaultView.getComputedStyle(resize).width);
     var startHeight = parseInt(document.defaultView.getComputedStyle(resize).height);
     var startTop = parseInt(document.defaultView.getComputedStyle(resize).top);

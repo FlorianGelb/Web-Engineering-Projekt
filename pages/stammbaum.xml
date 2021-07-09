@@ -1,4 +1,4 @@
-<?xml-stylesheet type="text/xsl" href="stammbaum.xsl"?>
+<?xml-stylesheet type="text/xsl" href="stammbaum2.xsl"?>
 <!DOCTYPE familie [
 <!ELEMENT familie (generation)>
 <!ELEMENT generation (Frau | Mann | generation)*>
