@@ -98,9 +98,12 @@ xmlns:xsl = "http://www.w3.org/1999/XSL/Transform">
 
 		
 <button id="myBtn">Open Modal</button>
+<button id="conf">Confirm</button>
 			<script src="modalButton.js"></script>
       <script src="resizelogic.js"></script>
-
+      <script src="test.js"></script>
+      <script src="get_input.js"></script>
+      
 		</body>
     </html>
 </xsl:template>
