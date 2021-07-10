@@ -4,40 +4,10 @@ const scaleFactor = 10; // minsize muss durch scaleFactor teilbar sein
 
 const resize = document.querySelector(".resize");
 
-var children = resize.children;
+var scaleSize = convertAbsoluteUnitsToRelative();
+orientateAdditionalInfo();
 
-var scaleSize = 0;
 
-for (var i=0; i<children.length; i++){
-    var element = children.item(i);
-    var elementWidth = parseInt(document.defaultView.getComputedStyle(element).width);
-    var elementHeight = parseInt(document.defaultView.getComputedStyle(element).height);
-    var elementTop = parseInt(document.defaultView.getComputedStyle(element).top);
-    var elementLeft = parseInt(document.defaultView.getComputedStyle(element).left);
-
-    if (elementWidth + elementLeft > scaleSize){
-        scaleSize = elementWidth + elementLeft;
-    }
-    if (elementHeight + elementTop > scaleSize){
-        scaleSize = elementWidth + elementLeft;
-    }
-}
-
-for (var i=0; i<children.length; i++){
-    var element = children.item(i);
-
-    var elementWidth = parseInt(document.defaultView.getComputedStyle(element).width);
-    var elementHeight = parseInt(document.defaultView.getComputedStyle(element).height);
-    var elementTop = parseInt(document.defaultView.getComputedStyle(element).top);
-    var elementLeft = parseInt(document.defaultView.getComputedStyle(element).left);
-
-    console.log(elementWidth, elementHeight, elementTop, elementLeft);
-
-    element.style.width = (elementWidth / scaleSize)*100 + '%';
-    element.style.height = (elementHeight / scaleSize) * 100 + '%';
-    element.style.top = (elementTop / scaleSize) * 100 + '%';
-    element.style.left = (elementLeft / scaleSize) * 100 + '%';
-}
 
 if (resize.addEventListener) {
     resize.addEventListener("wheel", scrollevent);
@@ -46,6 +16,65 @@ if (resize.addEventListener) {
 else {
     resize.onwheel = scrollevent;
     resize.attachEvent("onmousedown", mousedown);
+}
+
+function convertAbsoluteUnitsToRelative(){
+    var children = resize.children;
+
+    var scaleSize = 0;
+    scaleSize = parseInt(document.defaultView.getComputedStyle(resize).width);
+
+    for (var i=0; i<children.length; i++){
+        var element = children.item(i);
+        var elementWidth = parseInt(document.defaultView.getComputedStyle(element).width);
+        var elementHeight = parseInt(document.defaultView.getComputedStyle(element).height);
+        var elementTop = parseInt(document.defaultView.getComputedStyle(element).top);
+        var elementLeft = parseInt(document.defaultView.getComputedStyle(element).left);
+
+        if (elementWidth + elementLeft > scaleSize){
+            scaleSize = elementWidth + elementLeft;
+        }
+        if (elementHeight + elementTop > scaleSize){
+            scaleSize = elementWidth + elementLeft;
+        }
+    }
+
+    if (scaleSize < 800) {
+        scaleSize = 800;
+    }
+
+    for (var i=0; i<children.length; i++){
+        var element = children.item(i);
+
+        var elementWidth = parseInt(document.defaultView.getComputedStyle(element).width);
+        var elementHeight = parseInt(document.defaultView.getComputedStyle(element).height);
+        var elementTop = parseInt(document.defaultView.getComputedStyle(element).top);
+        var elementLeft = parseInt(document.defaultView.getComputedStyle(element).left);
+
+        console.log(elementWidth, elementHeight, elementTop, elementLeft);
+
+        element.style.width = (elementWidth / scaleSize)*100 + '%';
+        element.style.height = (elementHeight / scaleSize) * 100 + '%';
+        element.style.top = (elementTop / scaleSize) * 100 + '%';
+        element.style.left = (elementLeft / scaleSize) * 100 + '%';
+    }
+    return scaleSize;
+}
+
+function orientateAdditionalInfo () {
+    var additionalinfoList = document.getElementsByClassName("additionalinfo");
+
+    for (var i=0; i<additionalinfoList.length; i++) {
+        var additionalinfo = additionalinfoList.item(i)
+        var additionalinfoHeight = parseInt(document.defaultView.getComputedStyle(additionalinfo).height);
+
+        var elementTop = parseInt(document.defaultView.getComputedStyle(additionalinfo.parentElement.parentElement).top);
+
+        if (additionalinfoHeight >= elementTop) {
+             additionalinfo.style.bottom = 0;
+             additionalinfo.style.top = 100+"%";
+        }
+    }    
 }
 
 function mousedown(event) {

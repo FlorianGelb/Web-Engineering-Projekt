@@ -1,5 +1,7 @@
 <xsl:stylesheet version = "1.0" xmlns:xsl = "http://www.w3.org/1999/XSL/Transform"> 
 
+    <xsl:key name="personid" match="Frau|Mann" use="@id"/>
+
     <xsl:template match = "/familie">
         <html>
             <head>
@@ -31,18 +33,71 @@
                         <div class="resize">
                             <xsl:for-each select = "generation">
                                 <xsl:for-each select = "//generation">
-                                    <xsl:for-each select = "Frau">
+                                    <xsl:for-each select = "Frau|Mann">
                                         <div class="content" style="top: 100px; left:100px;">
-                                            <xsl:value-of select="@vorname"/>
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select="@nachname"/>
-                                        </div>
-                                    </xsl:for-each>
-                                    <xsl:for-each select = "Mann">
-                                        <div class="content">
-                                            <xsl:value-of select="@vorname"/>
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select="@nachname"/>
+                                            <div class="contentholder">
+                                                <xsl:value-of select="@vorname"/>
+                                                <xsl:text> </xsl:text>
+                                                <xsl:value-of select="@nachname"/>
+                                                <div class="additionalinfo">
+                                                    <div class="additionalinfo-header">
+                                                        <xsl:value-of select="@vorname"/>
+                                                        <xsl:text> </xsl:text>
+                                                        <xsl:value-of select="@nachname"/>
+                                                    </div>
+                                                    <div class="additionalinfo-body">
+                                                        <xsl:variable name="ehepartnerindex" select="@ehepartner"/>
+                                                        <xsl:variable name="mutterindex" select="@mutter"/>
+                                                        <xsl:variable name="vaterindex" select="@vater"/>
+                                                        <b>Geb: <xsl:value-of select="@geburtsdatum" /></b><br/>
+                                                        <b>Ort: <xsl:value-of select="@geburtsort" /></b><br/>
+                                                        <b>Tod: <xsl:value-of select="@todesdatum" /></b><br/>
+                                                        <b>Ehepartner: 
+                                                            <xsl:choose>
+                                                                <xsl:when test="@ehepartner=''">
+                                                                    <xsl:text> </xsl:text>
+                                                                </xsl:when>
+                                                                <xsl:otherwise>
+                                                                    <xsl:for-each select="key('personid', @ehepartner)">
+                                                                        <xsl:value-of select="@vorname"/>
+                                                                        <xsl:text> </xsl:text>
+                                                                        <xsl:value-of select="@nachname"/>
+                                                                    </xsl:for-each>
+                                                                </xsl:otherwise>
+                                                            </xsl:choose>
+                                                        </b><br/>
+                                                        <b>Mutter:  
+                                                            <xsl:choose>
+                                                                <xsl:when test="@mutter=''">
+                                                                    <xsl:text> </xsl:text>
+                                                                </xsl:when>
+                                                                <xsl:otherwise>
+                                                                    <xsl:for-each select="key('personid', @mutter)">
+                                                                        <xsl:value-of select="@vorname"/>
+                                                                        <xsl:text> </xsl:text>
+                                                                        <xsl:value-of select="@nachname"/>
+                                                                    </xsl:for-each>
+                                                                </xsl:otherwise>
+                                                            </xsl:choose>
+                                                        </b><br/>
+                                                        <b>Vater: 
+                                                            <xsl:choose>
+                                                                <xsl:when test="@vater=''">
+                                                                    <xsl:text> </xsl:text>
+                                                                </xsl:when>
+                                                                <xsl:otherwise>
+                                                                    <xsl:for-each select="key('personid', @vater)">
+                                                                        <xsl:value-of select="@vorname"/>
+                                                                        <xsl:text> </xsl:text>
+                                                                        <xsl:value-of select="@nachname"/>
+                                                                    </xsl:for-each>
+                                                                </xsl:otherwise>
+                                                            </xsl:choose>
+                                                        </b><br/>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
                                         </div>
                                     </xsl:for-each>
                                 </xsl:for-each>

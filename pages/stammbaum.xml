@@ -69,7 +69,7 @@
                     <Frau vorname="Martina" nachname="Kirk" geburtsdatum="02-02-95" geburtsort="Delft" todesdatum="" ehepartner="2" mutter="" vater="" id="1" familyId=""/>
                     <Mann vorname="Quinn" nachname="Lee" geburtsdatum="11-03-87" geburtsort="Itterbeek" todesdatum="" ehepartner="1" mutter="" vater="" id="2" familyId=""/>
 
-                    <Frau vorname="Addison" nachname="Larson" geburtsdatum="18-08-51" geburtsort="Saint-Dizier" todesdatum="4" ehepartner="" mutter="" vater="" id="3" familyId=""/>
+                    <Frau vorname="Addison" nachname="Larson" geburtsdatum="18-08-51" geburtsort="Saint-Dizier" todesdatum="" ehepartner="4" mutter="" vater="" id="3" familyId=""/>
                     <Mann vorname="Guy" nachname="Fry" geburtsdatum="04-04-63" geburtsort="Merritt" todesdatum="" ehepartner="3" mutter="" vater="" id="4" familyId=""/>
                 </generation>
             </generation>
