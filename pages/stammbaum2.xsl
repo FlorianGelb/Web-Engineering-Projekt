@@ -34,7 +34,18 @@
                             <xsl:for-each select = "generation">
                                 <xsl:for-each select = "//generation">
                                     <xsl:for-each select = "Frau|Mann">
-                                        <div class="content" style="top: 100px; left:100px;">
+                                        <div class="content" style="top: 100px; left:100px;"> 
+                                            <xsl:attribute name="data-vorname"><xsl:value-of select="@vorname"/></xsl:attribute>
+                                            <xsl:attribute name="data-nachname"><xsl:value-of select="@nachname"/></xsl:attribute>
+                                            <xsl:attribute name="data-geburtsdatum"><xsl:value-of select="@geburtsdatum"/></xsl:attribute>
+                                            <xsl:attribute name="data-geburtsort"><xsl:value-of select="@geburtsort"/></xsl:attribute>
+                                            <xsl:attribute name="data-todesdatum"><xsl:value-of select="@todesdatum"/></xsl:attribute>
+                                            <xsl:attribute name="data-ehepartner"><xsl:value-of select="@ehepartner"/></xsl:attribute>
+                                            <xsl:attribute name="data-mutter"><xsl:value-of select="@mutter"/></xsl:attribute>
+                                            <xsl:attribute name="data-vater"><xsl:value-of select="@vater"/></xsl:attribute>
+                                            <xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
+                                            <xsl:attribute name="data-familyId"><xsl:value-of select="@familyId"/></xsl:attribute>
+                                            
                                             <div class="contentholder">
                                                 <xsl:value-of select="@vorname"/>
                                                 <xsl:text> </xsl:text>
