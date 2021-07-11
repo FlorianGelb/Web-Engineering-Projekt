@@ -1,46 +1,90 @@
+class Person{
+
+  constructor(){}
+
+
+   fstName(fiName) {
+    this.firstName = fiName;
+  }
+
+  famName(fName){
+    this.familyName = fName;
+  }
+   
+
+  fmother(m){
+    this.mother = mother;
+  }
+
+  ffather(f){
+    this.father = father;
+  }
+  
+  fspouse(s){
+    this.spouse = spouse;
+  }
+    
+  fbirthPlace(bp){
+    this.birthPlace = birthPlace;
+  }
+
+  fdeathDate(dd){
+    this.deathDate = dd;
+  }
+
+  fbirthDate(bd){
+    this.birhtDate = bd;
+  }
+
+};
+
+
+window.Person = Person; 
+
 var btn = document.getElementById("conf");
 
-var person1 = new Object();
-var person2 = new Object();
-var newPers = new Object();
+var person1 = new Person();
+var person2 = new Person();
+var newPers = new Person();
+
 
 btn.onclick = function () {
     
-    person1.firstName = document.getElementById("firstName1").value;
-    person2.firstName = document.getElementById("firstName2").value;
-    newPers.firstName = document.getElementById("firstName").value;
+    person1.fstName (document.getElementById("firstName1").value);
+    person2.fstName(document.getElementById("firstName2").value);
+    newPers.fstName(document.getElementById("firstName").value);
 
-    person1.familyName = document.getElementById("familyName1").value;
-    person2.familyName = document.getElementById("familyName2").value;
-    newPers.familyName = document.getElementById("familyName").value;
+    person1.famName(document.getElementById("familyName1").value);
+    person2.famName(document.getElementById("familyName2").value);
+    newPers.famName(document.getElementById("familyName").value);
 
-    person1.mother = document.getElementById("mother1").value;
-    person2.mother = document.getElementById("mother2").value;
-    newPers.mother = document.getElementById("mother").value;
+    person1.fmother(document.getElementById("mother1").value);
+    person2.fmother(document.getElementById("mother2").value);
+    newPers.fmother(document.getElementById("mother").value);
     
 
-    person1.father = document.getElementById("father1").value;
-    person2.father = document.getElementById("father2").value;
-    newPers.father = document.getElementById("father").value;
+    person1.ffather(document.getElementById("father1").value);
+    person2.ffather(document.getElementById("father2").value);
+    newPers.ffather(document.getElementById("father").value);
 
-    person1.spouse = document.getElementById("spouse1").value;
-    person2.spouse = document.getElementById("spouse2").value;
-    newPers.spouse = document.getElementById("spouse").value;
+    person1.fspouse(document.getElementById("spouse1").value);
+    person2.fspouse(document.getElementById("spouse2").value);
+    newPers.fspouse(document.getElementById("spouse").value);
 
-    person1.birthPlace = document.getElementById("birthPlace1").value;
-    person2.birthPlace = document.getElementById("birthPlace2").value;
-    newPers.birthPlace = document.getElementById("birthPlace").value;
+    person1.fbirthPlace(document.getElementById("birthPlace1").value);
+    person2.fbirthPlace(document.getElementById("birthPlace2").valu);
+    newPers.fbirthPlace(document.getElementById("birthPlace").value);
 
-    person1.birthDate = document.getElementById("birthdate1").value;
-    person2.birthDate = document.getElementById("birthdate2").value;
-    newPers.birthDate = document.getElementById("birthdate").value;
+    person1.fbirthDate(document.getElementById("birthdate1").value);
+    person2.fbirthDate(document.getElementById("birthdate2").value);
+    newPers.fbirthDate(document.getElementById("birthdate").value);
 
-    person1.deathDate = document.getElementById("deathDate1").value;
-    person2.deathDate = document.getElementById("deathDate2").value;
-    newPers.deathDate = document.getElementById("deathDate").value;
+    person1.fdeathDate(document.getElementById("deathDate1").value);
+    person2.fdeathDate(document.getElementById("deathDate2").value);
+    newPers.fdeathDate(document.getElementById("deathDate").value);
 
 
-    console.log(newPers);
+
     set_object(person1, person2, newPers);
     test_compare(person1, person2, newPers);
 
