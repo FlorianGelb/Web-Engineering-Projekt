@@ -31,7 +31,7 @@ html, body {
     left: 0px;
     height: 500px;
     width: 500px;
-    background-color: burlywood;
+    /* background-color: burlywood; */
     resize: both;
     position: relative;
     display:inline-block;
