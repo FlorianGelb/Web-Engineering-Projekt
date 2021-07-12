@@ -60,6 +60,7 @@ header {
     cursor:default;
     display:inline-block;
     position:relative;
+    white-space: nowrap;
 }
 
 .contentholder:hover .additionalinfo {
@@ -73,6 +74,7 @@ header {
     right: 50%;
     transform: translateX(50%);
     white-space: nowrap;
+    z-index: 10;
 }
 
 .additionalinfo-header {
