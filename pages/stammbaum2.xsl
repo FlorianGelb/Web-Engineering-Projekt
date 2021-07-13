@@ -7,12 +7,83 @@
             <head>
                 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
                 <link rel="stylesheet" href="styles/styles.css" type="text/css" />
+                <link rel="stylesheet" href="styles/modalStyle.css" type="text/css" />
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"/>
 
                 <link rel="stylesheet" href="styles/stammbaum.css" type="text/css" />
             </head>
             <body style="text-align: center">
+
+
+
+ <h2>Modal Example</h2>
+
+  <!-- Trigger/Open The Modal -->
+
+
+
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+    <span class="close">&#xd7;</span>
+      <div class="modalGrid">
+        <div class="div1">
+          <h1>Name, Nachname</h1>
+          <form id="newPersonModal">
+            <label for="firstName">Vorname:</label>
+            <input type="text" id="firstName" name="firstName"></input>
+            <br></br>
+            <label for="familyName">Nachname:</label>
+            <input type="text" id="familyName" name="familyName"></input>
+          </form>
+        </div>
+        <div class="div2">
+          <h1>Mutter, Vater, Ehepartner</h1>
+
+          <label for="mother">Wählen Sie die Mutter aus:</label>
+          <select name="mother" id="mother" form="newPersonModal">
+            <option value="unknown"> ? </option>
+            <option value="xxxx">xxxx</option>
+          </select>
+          <br></br>
+          <label for="father">Wählen Sie den Vater aus:</label>
+          <select name="father" id="father" form="newPersonModal">
+            <option value="unknown"> ? </option>
+            <option value="xxxx">xxxx</option>
+          </select>
+          <br></br>
+          <label for="spouse">Wählen Sie den Ehepartner aus:</label>
+          <select name="spouse" id="spouse" form="newPersonModal">
+            <option value="none">-</option>
+            <option value="xxxx">xxxx</option>
+          </select>
+
+        </div>
+        <div class="div3">
+          <h1>Geburtsort, Geburtsdatum, Todesdatum</h1>
+          <label for="birthPlace">Geburtsort:</label>
+          <input type="text" id="birthPlace" name="birthPlace" form="newPersonModal"></input>
+          <br></br>
+          <label for="birthdate">Geburtsdatum:</label>
+          <input type="date" id="birthdate" name="birthdate"></input>
+          <br></br>
+          <label for="deathDate">Todesdatum:</label>
+          <input type="date" id="deathDate" name="deathDate"></input>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
 
                 <header>
                     <ul class="navbar">
@@ -116,7 +187,16 @@
                         </div>
                     </div>
                     <script src="scripts/resizelogic.js"></script>
+                    <script src="scripts/modalButton.js"></script>
+                    <script src="scripts/get_input.js"></script>
                 </div>
+                
+                <button type="button" id="myBtn">Click Me!</button>
+                <button type="button" id="conf">Click Me!</button>
+
+                
+
+
                 <footer>
                     <div class="footer-container">
                         <div class="contact">
