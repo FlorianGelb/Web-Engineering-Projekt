@@ -2,38 +2,53 @@ class Person {
 
     constructor() { }
 
-    fstName(fiName) {
-        this.firstName = fiName;
+    vorname(firstName) {
+        this.vorname = firstName;
     }
 
-    famName(fName) {
-        this.familyName = fName;
+    nachname(familyName) {
+        this.nachname = familyName;
     }
 
-
-    fmother(m) {
-        this.mother = mother;
+    geburtsdatum(birthDate) {
+        this.geburtsdatum = birthDate;
     }
 
-    ffather(f) {
-        this.father = father;
+    geburtsort(birthPlace) {
+        this.geburtsort = birthPlace;
+    }
+    
+    todesdatum(deathDate) {
+        this.todesdatum = deathDate;
     }
 
-    fspouse(s) {
-        this.spouse = spouse;
+    ehepartner(spouse) {
+        this.ehepartner = spouse;
     }
 
-    fbirthPlace(bp) {
-        this.birthPlace = birthPlace;
+    mutter(mother) {
+        this.mutter = mother;
     }
 
-    fdeathDate(dd) {
-        this.deathDate = dd;
+    vater(father) {
+        this.vater = father;
     }
 
-    fbirthDate(bd) {
-        this.birhtDate = bd;
+    id(id){
+        this.id = id;
     }
+
+    familyId(familyId){
+        this.familyId = familyId;
+    }
+
+    
+
+    
+
+    
+
+   
 
 
 
