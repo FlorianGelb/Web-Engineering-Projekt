@@ -187,6 +187,7 @@
                         </div>
                     </div>
                     <script src="scripts/resizelogic.js"></script>
+                    <script src="scripts/person.js"></script>
                     <script src="scripts/modalButton.js"></script>
                     <script src="scripts/get_input.js"></script>
                 </div>
