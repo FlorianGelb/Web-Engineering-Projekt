@@ -4,24 +4,88 @@ const fs = require("fs");
 const { parseString, Builder } = require("xml2js");
 
 
+
 // load XML and parse to JSON
-const xml = fs.readFileSync("../xml-beispiel/dummydata.xml").toString();
+const xml = fs.readFileSync("../stammbaum.xml").toString();
 parseString(xml, function (err, data) {
 
-    // Show the XML
-    console.log(data.familie.generation);
 
-    
-    
-    
-    
-    // Saved the XML
-     const builder = new Builder();
-     const xml = builder.buildObject(data);
-     fs.writeFileSync("dummydata.xml", xml, function (err, file) {
-         if (err) throw err;
-         console.log("Saved!");
-     });
+    for (let i = 0; i < Object.keys(data.stammbaum.familie).length; i++) {
+        console.log(loop(data.stammbaum.familie[i].generation, '200'));
+    }
+
+
+
+
 });
+
+function compare(person, personID) {
+    return person.$.id === personID;
+}
+
+function loop(generation, personID) {
+    var res = search(generation, personID);
+    if (res == undefined) {
+        if (generation[0].generation != undefined) {
+            return loop(generation[0].generation, personID)
+        } else {
+            console.log('Person nicht vorhanden!');
+            return;
+        }
+
+    } else {
+        return res;
+    }
+}
+
+function search(generation, personID) {
+    var mann = generation[0].Mann.find(element => compare(element, personID));
+    if (mann != undefined) {
+        return mann;
+    }
+    return generation[0].Frau.find(element => compare(element, personID));
+}
+
+
+
+
+
+function generatePerson(newPerson) {
+
+    // load XML and parse to JSON
+    const xml = fs.readFileSync("../xml-beispiel/dummydata.xml").toString();
+    parseString(xml, function (err, data) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // Saved the XML
+        const builder = new Builder();
+        const xml = builder.buildObject(data);
+        fs.writeFileSync("dummydata.xml", xml, function (err, file) {
+            if (err) throw err;
+            console.log("Saved!");
+        });
+    });
+
+}
+
+
+
 
 
