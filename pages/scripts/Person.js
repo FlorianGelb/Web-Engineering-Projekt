@@ -10,6 +10,10 @@ class Person {
         this.nachname = familyName;
     }
 
+    geschlecht(gender){
+        this.geschlecht = gender;
+    }
+
     geburtsdatum(birthDate) {
         this.geburtsdatum = birthDate;
     }

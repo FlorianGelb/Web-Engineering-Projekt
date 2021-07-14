@@ -11,8 +11,10 @@ parseString(xml, function (err, data) {
 
 
     for (let i = 0; i < Object.keys(data.stammbaum.familie).length; i++) {
-        console.log(loop(data.stammbaum.familie[i].generation, '200'));
+     console.log(loop(data.stammbaum.familie[i].generation, '400'));
+      
     }
+    
 
 
 
@@ -29,7 +31,7 @@ function loop(generation, personID) {
         if (generation[0].generation != undefined) {
             return loop(generation[0].generation, personID)
         } else {
-            console.log('Person nicht vorhanden!');
+           
             return;
         }
 
@@ -39,11 +41,9 @@ function loop(generation, personID) {
 }
 
 function search(generation, personID) {
-    var mann = generation[0].Mann.find(element => compare(element, personID));
-    if (mann != undefined) {
-        return mann;
-    }
-    return generation[0].Frau.find(element => compare(element, personID));
+    return generation[0].Person.find(element => compare(element, personID));
+   
+   
 }
 
 
@@ -57,7 +57,11 @@ function generatePerson(newPerson) {
     parseString(xml, function (err, data) {
 
 
+        if(newPerson.mutter == "" && newPerson.vater == "" && newPerson.ehepartner == ""){
 
+        }else if(newPerson.mutter != "" ){
+            
+        }
 
 
 
