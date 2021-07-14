@@ -1,8 +1,8 @@
 <xsl:stylesheet version = "1.0" xmlns:xsl = "http://www.w3.org/1999/XSL/Transform"> 
 
-    <xsl:key name="personid" match="Frau|Mann" use="@id"/>
+    <xsl:key name="personid" match="Person" use="@id"/>
 
-    <xsl:template match = "/familie">
+    <xsl:template match = "/stammbaum">
         <html>
             <head>
                 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -89,9 +89,9 @@
                     <h2>Family Tree</h2>
                     <div class="resizecontainer">
                         <div class="resize">
-                            <xsl:for-each select = "generation">
+                            <xsl:for-each select = "//familie">
                                 <xsl:for-each select = "//generation">
-                                    <xsl:for-each select = "Frau|Mann">
+                                    <xsl:for-each select = "Person">
                                         <div class="content" style="top: 300px; left:100px;"> 
                                             <xsl:attribute name="data-vorname"><xsl:value-of select="@vorname"/></xsl:attribute>
                                             <xsl:attribute name="data-nachname"><xsl:value-of select="@nachname"/></xsl:attribute>
