@@ -82,11 +82,9 @@ function excecutePositioning(personObject, verschiebung){
         depthcounter.push(0);
     }
 
-    var maxWidthElement = getGraphMaxWidth(list);
-    //var maxWidth = (maxWidthElement + 20) * Math.pow(2, depth);
     var maxWidth = (parseInt(document.defaultView.getComputedStyle(resize).width));
 
-    positionGraph(list, 0, depth, maxWidth, verschiebung, 1);     //erster Stammbaum platzieren
+    positionGraph(list, 0, depth, maxWidth, verschiebung, 1);
 
     return depth * 150;
 }
@@ -157,24 +155,6 @@ function placeLines(personObject, verschiebung, rekursionstiefe, maxWidth, posit
     }
 }
 
-function getGraphMaxWidth(personObject){
-    var maxWidth = parseInt(document.defaultView.getComputedStyle(personObject[0].object).width);
-    if (personObject[1].length > 0){
-        var parentOneWidth = getGraphMaxWidth(personObject[1][0]);
-        if (parentOneWidth > maxWidth){
-            maxWidth = parentOneWidth;
-        }
-        if (personObject[1].length > 1){
-            var parentTwoWidth = getGraphMaxWidth(personObject[1][1]);
-            if (parentTwoWidth > maxWidth) {
-                maxWidth = parentTwoWidth;
-            }
-        }
-        
-    }
-    
-    return maxWidth;
-}
 
 function getGraphdepth (personObject, depth){
     
