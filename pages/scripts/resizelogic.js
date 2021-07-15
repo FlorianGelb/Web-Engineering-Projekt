@@ -4,7 +4,9 @@ const scaleFactor = 10; // minsize muss durch scaleFactor teilbar sein
 const resize = document.querySelector(".resize");
 var depthcounter = []
 
+
 window.addEventListener("load", onLoad);
+
 
 
 
@@ -197,6 +199,8 @@ function convertAbsoluteUnitsToRelative(){
         var elementHeight = parseInt(document.defaultView.getComputedStyle(element).height);
         var elementTop = parseInt(document.defaultView.getComputedStyle(element).top);
         var elementLeft = parseInt(document.defaultView.getComputedStyle(element).left);
+        
+        console.log(elementWidth, elementHeight, elementTop, elementLeft);
 
         if (elementWidth + elementLeft > scaleSize){
             scaleSize = elementWidth + elementLeft;

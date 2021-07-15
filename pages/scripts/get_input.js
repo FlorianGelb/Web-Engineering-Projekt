@@ -1,45 +1,3 @@
-class Person{
-
-  constructor(){}
-
-
-   fstName(fiName) {
-    this.firstName = fiName;
-  }
-
-  famName(fName){
-    this.familyName = fName;
-  }
-   
-
-  fmother(m){
-    this.mother = mother;
-  }
-
-  ffather(f){
-    this.father = father;
-  }
-  
-  fspouse(s){
-    this.spouse = spouse;
-  }
-    
-  fbirthPlace(bp){
-    this.birthPlace = birthPlace;
-  }
-
-  fdeathDate(dd){
-    this.deathDate = dd;
-  }
-
-  fbirthDate(bd){
-    this.birhtDate = bd;
-  }
-
-};
-
-
-window.Person = Person; 
 
 var btn = document.getElementById("conf");
 
@@ -82,13 +40,6 @@ btn.onclick = function () {
     person1.fdeathDate(document.getElementById("deathDate1").value);
     person2.fdeathDate(document.getElementById("deathDate2").value);
     newPers.fdeathDate(document.getElementById("deathDate").value);
-
-
-
-    set_object(person1, person2, newPers);
-    test_compare(person1, person2, newPers);
-
-
   }
 
 

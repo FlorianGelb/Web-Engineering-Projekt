@@ -1,12 +1,13 @@
 <xsl:stylesheet version = "1.0" xmlns:xsl = "http://www.w3.org/1999/XSL/Transform"> 
 
-    <xsl:key name="personid" match="Frau|Mann" use="@id"/>
+    <xsl:key name="personid" match="Person" use="@id"/>
 
-    <xsl:template match = "/familie">
+    <xsl:template match = "/stammbaum">
         <html>
             <head>
                 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
                 <link rel="stylesheet" href="styles/styles.css" type="text/css" />
+                <link rel="stylesheet" href="styles/modalStyle.css" type="text/css" />
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -14,6 +15,63 @@
                 <link rel="stylesheet" href="styles/stammbaum.css" type="text/css" />
             </head>
             <body style="text-align: center">
+
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+    <span class="close">&#xd7;</span>
+      <div class="modalGrid">
+        <div class="div1">
+          <h1>Name, Nachname</h1>
+          <form id="newPersonModal">
+            <label for="firstName">Vorname:</label>
+            <input type="text" id="firstName" name="firstName"></input>
+            <br></br>
+            <label for="familyName">Nachname:</label>
+            <input type="text" id="familyName" name="familyName"></input>
+          </form>
+        </div>
+        <div class="div2">
+          <h1>Mutter, Vater, Ehepartner</h1>
+
+          <label for="mother">Wählen Sie die Mutter aus:</label>
+          <select name="mother" id="mother" form="newPersonModal">
+            <option value="unknown"> ? </option>
+            <option value="xxxx">xxxx</option>
+          </select>
+          <br></br>
+          <label for="father">Wählen Sie den Vater aus:</label>
+          <select name="father" id="father" form="newPersonModal">
+            <option value="unknown"> ? </option>
+            <option value="xxxx">xxxx</option>
+          </select>
+          <br></br>
+          <label for="spouse">Wählen Sie den Ehepartner aus:</label>
+          <select name="spouse" id="spouse" form="newPersonModal">
+            <option value="none">-</option>
+            <option value="xxxx">xxxx</option>
+          </select>
+
+        </div>
+        <div class="div3">
+          <h1>Geburtsort, Geburtsdatum, Todesdatum</h1>
+          <label for="birthPlace">Geburtsort:</label>
+          <input type="text" id="birthPlace" name="birthPlace" form="newPersonModal"></input>
+          <br></br>
+          <label for="birthdate">Geburtsdatum:</label>
+          <input type="date" id="birthdate" name="birthdate"></input>
+          <br></br>
+          <label for="deathDate">Todesdatum:</label>
+          <input type="date" id="deathDate" name="deathDate"></input>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
 
                 <header>
                     <ul class="navbar">
@@ -32,9 +90,9 @@
                     <h2>Family Tree</h2>
                     <div class="resizecontainer">
                         <div class="resize">
-                            <xsl:for-each select = "generation">
+                            <xsl:for-each select = "//familie">
                                 <xsl:for-each select = "//generation">
-                                    <xsl:for-each select = "Frau|Mann">
+                                    <xsl:for-each select = "Person">
                                         <div class="content" style="top: 300px; left:100px;"> 
                                             <xsl:attribute name="data-geschlecht"><xsl:value-of select="name()"/></xsl:attribute>
                                             <xsl:attribute name="data-vorname"><xsl:value-of select="@vorname"/></xsl:attribute>
@@ -121,8 +179,124 @@
                     </div>
                     <script src="scripts/relationships.js"></script>
                     <script src="scripts/resizelogic.js"></script>
+                    <script src="scripts/person.js"></script>
+                    <script src="scripts/modalButton.js"></script>
+                    <script src="scripts/get_input.js"></script>
                     <script src="scripts/fittext.js"></script>
                 </div>
+
+    <div>
+    <div class="modal-content">
+      <div class="modalGrid">
+        <div class="div1">
+          <h1>Name, Nachname</h1>
+          <form id="newPersonModal">
+            <label for="firstName">Vorname:</label>
+            <input type="text" id="firstName1" name="firstName"></input>
+            <br></br>
+            <label for="familyName">Nachname:</label>
+            <input type="text" id="familyName1" name="familyName"></input>
+          </form>
+        </div>
+        <div class="div2">
+          <h1>Mutter, Vater, Ehepartner</h1>
+
+          <label for="mother">Wählen Sie die Mutter aus:</label>
+          <select name="mother" id="mother1" form="newPersonModal">
+            <option value="unknown"> ? </option>
+            <option value="xxxx">xxxx</option>
+          </select>
+          <br></br>
+          <label for="father">Wählen Sie den Vater aus:</label>
+          <select name="father" id="father1" form="newPersonModal">
+            <option value="unknown"> ? </option>
+            <option value="xxxx">xxxx</option>
+          </select>
+          <br></br>
+          <label for="spouse">Wählen Sie den Ehepartner aus:</label>
+          <select name="spouse" id="spouse1" form="newPersonModal">
+            <option value="none">-</option>
+            <option value="xxxx">xxxx</option>
+          </select>
+
+        </div>
+        <div class="div3">
+          <h1>Geburtsort, Geburtsdatum, Todesdatum</h1>
+          <label for="birthPlace">Geburtsort:</label>
+          <input type="text" id="birthPlace1" name="birthPlace" form="newPersonModal"></input>
+          <br></br>
+          <label for="birthdate">Geburtsdatum:</label>
+          <input type="date" id="birthdate1" name="birthdate"></input>
+          <br></br>
+          <label for="deathDate">Todesdatum:</label>
+          <input type="date" id="deathDate1" name="deathDate"></input>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div>
+    <div class="modal-content">
+      <div class="modalGrid">
+        <div class="div1">
+          <h1>Name, Nachname</h1>
+          <form id="newPersonModal">
+            <label for="firstName">Vorname:</label>
+            <input type="text" id="firstName2" name="firstName"></input>
+            <br></br>
+            <label for="familyName">Nachname:</label>
+            <input type="text" id="familyName2" name="familyName"></input>
+          </form>
+        </div>
+        <div class="div2">
+          <h1>Mutter, Vater, Ehepartner</h1>
+
+          <label for="mother">Wählen Sie die Mutter aus:</label>
+          <select name="mother" id="mother2" form="newPersonModal">
+            <option value="unknown"> ? </option>
+            <option value="xxxx">xxxx</option>
+          </select>
+          <br></br>
+          <label for="father">Wählen Sie den Vater aus:</label>
+          <select name="father" id="father2" form="newPersonModal">
+            <option value="unknown"> ? </option>
+            <option value="xxxx">xxxx</option>
+          </select>
+          <br></br>
+          <label for="spouse">Wählen Sie den Ehepartner aus:</label>
+          <select name="spouse" id="spouse2" form="newPersonModal">
+            <option value="none">-</option>
+            <option value="xxxx">xxxx</option>
+          </select>
+
+        </div>
+        <div class="div3">
+          <h1>Geburtsort, Geburtsdatum, Todesdatum</h1>
+          <label for="birthPlace">Geburtsort:</label>
+          <input type="text" id="birthPlace2" name="birthPlace" form="newPersonModal"></input>
+          <br></br>
+          <label for="birthdate">Geburtsdatum:</label>
+          <input type="date" id="birthdate2" name="birthdate"></input>
+          <br></br>
+          <label for="deathDate">Todesdatum:</label>
+          <input type="date" id="deathDate2" name="deathDate"></input>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+                
+                <button type="button" id="myBtn">Click Me!</button>
+                <button type="button" id="conf">Click Me!</button>
+
+                
+
+
                 <footer>
                     <div class="footer-container">
                         <div class="contact">
