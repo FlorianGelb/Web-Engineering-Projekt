@@ -1,13 +1,10 @@
 const maxsize = 3000;
 const minsize = 900;
 const scaleFactor = 10; // minsize muss durch scaleFactor teilbar sein
-
 const resize = document.querySelector(".resize");
+var depthcounter = []
 
-positionElements();
-
-var scaleSize = convertAbsoluteUnitsToRelative();
-orientateAdditionalInfo();
+window.addEventListener("load", onLoad);
 
 
 
@@ -20,166 +17,192 @@ else {
     resize.attachEvent("onmousedown", mousedown);
 }
 
-function positionElements(){
+function onLoad(){
+    positionElements(27, 25);
+
+    convertAbsoluteUnitsToRelative();
+    orientateAdditionalInfo();
+}
+
+function positionElements(startIdone, startIdtwo){
     var personList = Array.from(document.getElementsByClassName("content"));
-    var generationList = [[], []];
 
-    for (var i=0; i<personList.length; i++){
-        if (personList[i].getAttribute("data-mutter") == "" && personList[i].getAttribute("data-vater") == ""){
-            generationList[1].push(personList[i]);
-            personList.splice(i, 1);
-            i--;
+    var personObjectList = []
+
+    var startObjectOneIndex, startObjectTwoIndex;
+
+    for (let i=0; i<personList.length; i++){
+        personObjectList.push(new Person(personList[i]));
+        if (personObjectList[personObjectList.length - 1].id == startIdone){
+            startObjectOneIndex = personObjectList.length-1;
         }
     }
 
-    for (var i=0; i<generationList[1].length; i++) {
-        var currentId = generationList[1][i].getAttribute("data-id");
-        for (var j=0; j<personList.length; j++) {
-            if (personList[j].getAttribute("data-mutter") == currentId || personList[j].getAttribute("data-vater") == currentId || personList[j].getAttribute("data-ehepartner") == currentId) {
-                generationList[0].push(generationList[1][i]);
-                generationList[1].splice(i, 1);
-                i--;
-                break;
+    for (let i = 0; i < personObjectList.length; i++){
+        for (let j = 0; j < personObjectList.length; j++){
+            if (personObjectList[i].vater == personObjectList[j].id){
+                personObjectList[i].vaterobject = personObjectList[j];
             }
-        }
-    }
-
-
-    while (personList.length > 0) {
-        generationList.push([]);
-        for (var i=0; i<personList.length; i++) {
-            var mutter = false;
-            var vater = false;
-            var mutterId = personList[i].getAttribute("data-mutter");
-            var vaterId = personList[i].getAttribute("data-vater");
-            if (mutterId == ""){
-                mutter = true;
-            }
-            if (vaterId == "") {
-                vater = true;
-            }
-            for (var j=0; j<generationList.length-1; j++){
-                for (var k=0; k<generationList[j].length; k++){
-                    if (!mutter && generationList[j][k].getAttribute("data-id") == mutterId){
-                        mutter = true;
-                    }
-                    if (!vater && generationList[j][k].getAttribute("data-id") == vaterId) {
-                        vater = true;
-                    }
-                    if (mutter && vater){
-                        break;
-                    }
-                }
-                if (mutter && vater) {
-                    break;
-                }
-            }
-            if (mutter && vater) {
-                generationList[generationList.length-1].push(personList[i]);
-                personList.splice(i, 1);
-                i--;
-            }
-
-        }
-    }
-
-    for (var i=0; i<generationList.length; i++){
-        for (var j=0; j<generationList[i].length; j++){
-            var mutterId = generationList[i][j].getAttribute("data-mutter");
-            var vaterId = generationList[i][j].getAttribute("data-vater");
-            if (mutterId == "" && vaterId == ""){
-                continue;
-            }
-            for (var k=0; k<j; k++){
-                if (generationList[i][k].getAttribute("data-mutter") == mutterId && generationList[i][k].getAttribute("data-vater") == vaterId) {
-                    var object = generationList[i][j];
-                    generationList[i].splice(j, 1);
-                    generationList[i].splice(k+1, 0, object);
-                    break;
-                }
-            }
-        }
-    }
-
-    for (var i = 0; i < generationList.length; i++){
-        for (var j = 0; j < generationList[i].length; j++){
-            var ehepartnerId = generationList[i][j].getAttribute("data-ehepartner");
-            console.log(j);
-            if (j != 0 && j != generationList[i].length-1){
-                if (generationList[i][j - 1].getAttribute("data-id") == ehepartnerId || generationList[i][j + 1].getAttribute("data-id") == ehepartnerId){
-                    continue;
-                }
-            }
-            else if (j == 0 && generationList[i][j + 1].getAttribute("data-id") == ehepartnerId){
-                continue;
-            }
-            else if (j == generationList[i].length && generationList[i][j - 1].getAttribute("data-id") == ehepartnerId) {
-                continue;
-            }
-            for (var k = 0; k < j; k++){
-                if (generationList[i][k].getAttribute("data-id") == ehepartnerId){
-                    var object = generationList[i][k];
-                    generationList[i].splice(k, 1);
-                    generationList[i].splice(j + 1, 0, object);
-                    break;
-                }
-            }
-        }
-    }
-
-    for (var i = 0; i < generationList.length; i++) {
-        for (var j = 0; j < generationList[i].length; j++) {
-            var ehepartnerId = generationList[i][j].getAttribute("data-ehepartner");
-            if (ehepartnerId == "") {
-                continue;
-            }
-            var placed = false;
-            for (var k = i+1; k < generationList.length; k++) {
-                for (var l = 0; l < generationList[k].length; l++){
-                    if (generationList[k][l].getAttribute("data-id") == ehepartnerId){
-                        var object = generationList[i][j];
-                        generationList[i].splice(j, 1);
-                        generationList[k].splice(l + 1, 0, object);
-                        placed = true;
-                        j--;
-                        break;
-                    }
-                }
-                if (placed){
-                    break;
-                }
+            else if (personObjectList[i].mutter == personObjectList[j].id) {
+                personObjectList[i].mutterobject = personObjectList[j];
             }
         }
     }
 
 
-    for (var i=0; i<generationList.length; i++){
-        for (var j=0; j<generationList[i].length; j++){
-            generationList[i][j].style.top = i * 100 + 50 +"px";
-            if (j==0){
-                generationList[i][j].style.left = 0 + "px";
+    var verschiebung = excecutePositioning(personObjectList[startObjectOneIndex], 0);
+
+    if (startIdtwo != undefined){
+        for (let i = 0; i < personObjectList.length; i++) {
+            if (personObjectList[i].id == startIdtwo) {
+                startObjectTwoIndex = i;
             }
-            else {
-                if (generationList[i][j].getAttribute("data-ehepartner") == generationList[i][j-1].getAttribute("data-id")){
-                    var elementWidth = parseInt(document.defaultView.getComputedStyle(generationList[i][j - 1]).width);
-                    var elementLeft = parseInt(document.defaultView.getComputedStyle(generationList[i][j - 1]).left);
+        }
 
-                    var newLeft = elementWidth + elementLeft;
+        verschiebung = excecutePositioning(personObjectList[startObjectTwoIndex], verschiebung+200);
+    }
 
-                    generationList[i][j].style.left = newLeft + "px";
-                }
-                else {
-                    var elementWidth = parseInt(document.defaultView.getComputedStyle(generationList[i][j - 1]).width);
-                    var elementLeft = parseInt(document.defaultView.getComputedStyle(generationList[i][j - 1]).left);
+    
 
-                    var newLeft = elementWidth + elementLeft + 50;
-
-                    generationList[i][j].style.left = newLeft + "px";
-                }
-            }
-            
+    for (let i=0; i<personObjectList.length; i++){
+        if (personObjectList[i].angezeigt == false){
+            personObjectList[i].object.style.visibility = "hidden";
         }
     }
+
+}
+
+function excecutePositioning(personObject, verschiebung){
+    var list = constructorAncestorList(personObject);
+    var depth = getGraphdepth(list, 0);
+
+    depthcounter = [];
+
+    for (let i = 0; i < depth; i++) {
+        depthcounter.push(0);
+    }
+
+    var maxWidthElement = getGraphMaxWidth(list);
+    //var maxWidth = (maxWidthElement + 20) * Math.pow(2, depth);
+    var maxWidth = (parseInt(document.defaultView.getComputedStyle(resize).width));
+
+    positionGraph(list, 0, depth, maxWidth, verschiebung, 1);     //erster Stammbaum platzieren
+
+    return depth * 150;
+}
+
+function positionGraph(personObject, rekursionstiefe, depth, maxWidth, verschiebung, position){
+
+    if (!personObject[0].angezeigt){
+        personObject[0].angezeigt = true;
+        personObject[0].object.style.top = verschiebung + (150*(depth-rekursionstiefe)) + "px";
+        var left = (maxWidth * (position*1/(Math.pow(2, rekursionstiefe+1))))+200;
+        personObject[0].object.style.left = left + "px";
+    }
+    else {
+        var clonedObject = personObject[0].object.cloneNode(true);
+        clonedObject.style.top = verschiebung + (150 * (depth - rekursionstiefe)) + "px";
+        var left = (maxWidth * (position * 1 / (Math.pow(2, rekursionstiefe + 1))))+200;
+        clonedObject.style.left = left + "px";
+        clonedObject.setAttribute("clone", personObject[0].id)
+        resize.appendChild(clonedObject);
+    }
+
+    placeLines(personObject, verschiebung, rekursionstiefe, maxWidth, position * 2 - 1);
+
+    depthcounter[rekursionstiefe]++;
+    rekursionstiefe++;
+    if (personObject[1].length > 0) {
+        positionGraph(personObject[1][0], rekursionstiefe, depth, maxWidth, verschiebung, position*2-1);
+    }
+    if (personObject[1].length > 1) {
+        positionGraph(personObject[1][1], rekursionstiefe, depth, maxWidth, verschiebung, position*2+1);
+    }
+    
+}
+
+function placeLines(personObject, verschiebung, rekursionstiefe, maxWidth, position){
+    var object;
+    if (verschiebung == 0){
+        object = personObject[0].object;
+        
+    }
+    else {
+        object = document.querySelector("[clone='"+personObject[0].id+"']");
+        if (object == undefined){
+            object = personObject[0].object;
+        }
+    }
+
+    if (personObject[1].length > 0){
+
+        
+        var horizontaldiv = document.createElement('div');
+        horizontaldiv.className = 'connectionlinehorizontal';
+        var width = ((maxWidth * (1 / (Math.pow(2, rekursionstiefe + 1)))) - parseInt(document.defaultView.getComputedStyle(object.firstChild).width));
+        horizontaldiv.style.width = width + "px";
+        horizontaldiv.style.height = "3px";
+        horizontaldiv.style.top = (parseInt(document.defaultView.getComputedStyle(object).top) -140) + "px";
+        horizontaldiv.style.left = (((parseInt(document.defaultView.getComputedStyle(object).left)+7) + parseInt(document.defaultView.getComputedStyle(personObject[1][0][0].object).width) * 0.5) - width*0.5) + "px";
+        resize.appendChild(horizontaldiv);
+
+        
+        var verticaldiv = document.createElement('div');
+        verticaldiv.className = 'connectionlinevertical';
+        verticaldiv.style.width = "3px";
+        verticaldiv.style.height = "146px";
+        verticaldiv.style.top = (parseInt(document.defaultView.getComputedStyle(object).top) - 140) + "px";
+        verticaldiv.style.left = ((parseInt(document.defaultView.getComputedStyle(object).left) + 10) + parseInt(document.defaultView.getComputedStyle(object.firstChild).width)*0.5) + "px";
+        resize.appendChild(verticaldiv);
+    }
+}
+
+function getGraphMaxWidth(personObject){
+    var maxWidth = parseInt(document.defaultView.getComputedStyle(personObject[0].object).width);
+    if (personObject[1].length > 0){
+        var parentOneWidth = getGraphMaxWidth(personObject[1][0]);
+        if (parentOneWidth > maxWidth){
+            maxWidth = parentOneWidth;
+        }
+        if (personObject[1].length > 1){
+            var parentTwoWidth = getGraphMaxWidth(personObject[1][1]);
+            if (parentTwoWidth > maxWidth) {
+                maxWidth = parentTwoWidth;
+            }
+        }
+        
+    }
+    
+    return maxWidth;
+}
+
+function getGraphdepth (personObject, depth){
+    
+    if (personObject[1].length > 0){
+        var depthone = getGraphdepth(personObject[1][0], depth);
+        var depthholder = depthone;
+        if (personObject[1].length > 1){
+            var depthtwo = getGraphdepth(personObject[1][1], depth);
+            if (depthtwo > depthholder){
+                depthholder = depthtwo;
+            }
+        }
+        depth+=depthholder;   
+    }
+    depth++;
+    return depth;
+}
+
+function constructorAncestorList(personObject){
+    var list = [personObject, []];
+    if (personObject.vater != ""){
+        list[1].push(constructorAncestorList(personObject.vaterobject));
+    }
+    if (personObject.mutter != "") {
+        list[1].push(constructorAncestorList(personObject.mutterobject));
+    }
+
+    return list;
 }
 
 function convertAbsoluteUnitsToRelative(){
@@ -188,7 +211,7 @@ function convertAbsoluteUnitsToRelative(){
     var scaleSize = 0;
     scaleSize = parseInt(document.defaultView.getComputedStyle(resize).width);
 
-    for (var i=0; i<children.length; i++){
+    for (let i=0; i<children.length; i++){
         var element = children.item(i);
         var elementWidth = parseInt(document.defaultView.getComputedStyle(element).width);
         var elementHeight = parseInt(document.defaultView.getComputedStyle(element).height);
@@ -199,15 +222,18 @@ function convertAbsoluteUnitsToRelative(){
             scaleSize = elementWidth + elementLeft;
         }
         if (elementHeight + elementTop > scaleSize){
-            scaleSize = elementWidth + elementLeft;
+            scaleSize = elementHeight + elementTop;
         }
     }
+
+    scaleSize += 50;
 
     if (scaleSize < 800) {
         scaleSize = 800;
     }
 
-    for (var i=0; i<children.length; i++){
+
+    for (let i=0; i<children.length; i++){
         var element = children.item(i);
 
         var elementWidth = parseInt(document.defaultView.getComputedStyle(element).width);
@@ -226,15 +252,20 @@ function convertAbsoluteUnitsToRelative(){
 function orientateAdditionalInfo () {
     var additionalinfoList = document.getElementsByClassName("additionalinfo");
 
-    for (var i=0; i<additionalinfoList.length; i++) {
+    for (let i=0; i<additionalinfoList.length; i++) {
         var additionalinfo = additionalinfoList.item(i)
         var additionalinfoHeight = parseInt(document.defaultView.getComputedStyle(additionalinfo).height);
 
         var elementTop = parseInt(document.defaultView.getComputedStyle(additionalinfo.parentElement.parentElement).top);
+        elementTop += parseInt(document.defaultView.getComputedStyle(additionalinfo.parentElement.parentElement.parentElement).top);
 
         if (additionalinfoHeight >= elementTop) {
-             additionalinfo.style.bottom = 0;
+             additionalinfo.style.removeProperty("bottom");
              additionalinfo.style.top = 100+"%";
+        }
+        else {
+            additionalinfo.style.bottom = 100+"%";
+            additionalinfo.style.removeProperty("top");
         }
 
         var additionalinfoWidth = parseInt(document.defaultView.getComputedStyle(additionalinfo).width);
@@ -271,7 +302,11 @@ function orientateAdditionalInfo () {
             additionalinfo.style.right = 50 + "%";
             additionalinfo.style.transform = "translateX(50 %)";
         }
-    }    
+    }
+    var contentTextList = document.getElementsByClassName("contenttextholder");
+    for(let i=0; i<contentTextList.length; i++){
+        fitText(contentTextList.item(i), 0.8);
+    }
 }
 
 function mousedown(event) {
@@ -318,6 +353,7 @@ function mousedown(event) {
 
         prevX = event.clientX;
         prevY = event.clientY;
+        orientateAdditionalInfo();
     }
 
     function mouseup() {
@@ -396,6 +432,7 @@ function scrollevent(event) {
     else if (newLeft < minsize - newWidth) {
         resize.style.left = (minsize - newWidth) + 'px';
     }
+    orientateAdditionalInfo();
 }
 
 function getRelativeCoordinates(event, referenceElement) {

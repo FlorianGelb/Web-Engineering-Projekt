@@ -49,9 +49,11 @@
                                             <xsl:attribute name="data-familyId"><xsl:value-of select="@familyId"/></xsl:attribute>
                                             
                                             <div class="contentholder">
-                                                <xsl:value-of select="@vorname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="@nachname"/>
+                                                <div class="contenttextholder">
+                                                    <xsl:value-of select="@vorname"/>
+                                                    <xsl:text> </xsl:text>
+                                                    <xsl:value-of select="@nachname"/>
+                                                </div>
                                                 <div class="additionalinfo">
                                                     <div class="additionalinfo-header">
                                                         <xsl:value-of select="@vorname"/>
@@ -117,7 +119,9 @@
                             </xsl:for-each>
                         </div>
                     </div>
+                    <script src="scripts/relationships.js"></script>
                     <script src="scripts/resizelogic.js"></script>
+                    <script src="scripts/fittext.js"></script>
                 </div>
                 <footer>
                     <div class="footer-container">
