@@ -20,7 +20,7 @@ else {
 }
 
 function onLoad(){
-    positionElements(27, 25);
+    positionElements(20, 15);
 
     convertAbsoluteUnitsToRelative();
     orientateAdditionalInfo();
@@ -34,7 +34,7 @@ function positionElements(startIdone, startIdtwo){
     var startObjectOneIndex, startObjectTwoIndex;
 
     for (let i=0; i<personList.length; i++){
-        personObjectList.push(new Person(personList[i]));
+        personObjectList.push(new PersonB(personList[i]));
         if (personObjectList[personObjectList.length - 1].id == startIdone){
             startObjectOneIndex = personObjectList.length-1;
         }

@@ -1,4 +1,4 @@
-class Person {
+class PersonB {
     constructor(htmlobject){
         this.object = htmlobject;
         this.vorname = htmlobject.getAttribute("data-vorname");

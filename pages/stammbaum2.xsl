@@ -94,7 +94,7 @@
                                 <xsl:for-each select = "//generation">
                                     <xsl:for-each select = "Person">
                                         <div class="content" style="top: 300px; left:100px;"> 
-                                            <xsl:attribute name="data-geschlecht"><xsl:value-of select="name()"/></xsl:attribute>
+                                            <xsl:attribute name="data-geschlecht"><xsl:value-of select="@geschlecht"/></xsl:attribute>
                                             <xsl:attribute name="data-vorname"><xsl:value-of select="@vorname"/></xsl:attribute>
                                             <xsl:attribute name="data-nachname"><xsl:value-of select="@nachname"/></xsl:attribute>
                                             <xsl:attribute name="data-geburtsdatum"><xsl:value-of select="@geburtsdatum"/></xsl:attribute>
