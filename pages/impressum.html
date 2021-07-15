@@ -4,26 +4,27 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="styles/styles.css">
+	
+    <script language="javascript" type="text/javascript" src="scripts/templates.js"></script>
 
 	<title>Impressum Stammbaum</title>
-	<link
-	rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-  />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
-	<header>
-		<ul class="navbar">
-		  <li><a class="active" href="index.html">Home</a></li>
-		  <li><a href="stammbaum.xml">Stammbaum</a></li>
-		  <li style="float: right">
-			<a href="stammbaum.xml">Platzhalter Option Icon</a>
-		  </li>
-		</ul>
-	  </header>
+	<div id="templateNav" class="navbar">
+        <a class="active" href="index.html" id="templateActive">Home</a>
+        <a href="stammbaum.xml">Stammbaum</a>
+        <div class="dropdown" style="float: right;">
+           <button class="dropbtn" id="dropbtn">Templates 
+        </button>
+          <div class="dropdown-content">
+			<a href="#" onclick="greyThemeImpressum()">Grau</a>
+            <a href="#" onclick="lightgreenThemeImpressum()">Türkis</a>
+            <a href="#">Link 3</a>
+          </div>
+        </div>
+      </div>
 	<center><img src="assets/img/impressumParagraph.jpg" style="width: 30%; margin-top: 5%;"></center>
 	<div class="imp_wrapper">
 		<div class="imp_leftDiv">
