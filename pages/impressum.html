@@ -4,21 +4,23 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="styles/styles.css">
+	
+    <script language="javascript" type="text/javascript" src="scripts/templates.js"></script>
 
 	<title>Impressum Stammbaum</title>
 
 </head>
 
 <body>
-	<div class="navbar">
-        <a class="active" href="index.html">Home</a>
+	<div id="templateNav" class="navbar">
+        <a class="active" href="index.html" id="templateActive">Home</a>
         <a href="stammbaum.xml">Stammbaum</a>
         <div class="dropdown" style="float: right;">
-           <button class="dropbtn">Templates 
+           <button class="dropbtn" id="dropbtn">Templates 
         </button>
           <div class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
+			<a href="#" onclick="greyThemeImpressum()">Grau</a>
+            <a href="#" onclick="lightgreenThemeImpressum()">Türkis</a>
             <a href="#">Link 3</a>
           </div>
         </div>
