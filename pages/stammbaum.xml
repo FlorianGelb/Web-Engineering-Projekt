@@ -31,8 +31,8 @@
 ]>
 <familie>
     <generation>
-        <Frau vorname="Alexandra" nachname="Ewing" geburtsdatum="15-01-36" geburtsort="Laken" todesdatum="" ehepartner="" mutter="16" vater="15" id="54" familyId=""/>
-        <Mann vorname="Brenden" nachname="Ewing" geburtsdatum="01-06-46" geburtsort="Enna" todesdatum="" ehepartner="" mutter="16" vater="15" id="78" familyId=""/>
+        <Frau vorname="Alexandra" nachname="Ewing" geburtsdatum="15-01-36" geburtsort="Laken" todesdatum="" ehepartner="" mutter="16" vater="15" id="26" familyId=""/>
+        <Mann vorname="Brenden" nachname="Ewing" geburtsdatum="01-06-46" geburtsort="Enna" todesdatum="" ehepartner="" mutter="16" vater="15" id="27" familyId=""/>
         <generation>
             <Frau vorname="Jasmine" nachname="Lee" geburtsdatum="11-08-48" geburtsort="Bearberry" todesdatum="" ehepartner="" mutter="5" vater="6" id="13" familyId=""/>
             <Mann vorname="Finn" nachname="Lee" geburtsdatum="29-12-16" geburtsort="Lacombe County" todesdatum="" ehepartner="" mutter="5" vater="6" id="14" familyId=""/>

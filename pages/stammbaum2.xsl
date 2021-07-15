@@ -8,7 +8,8 @@
                 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
                 <link rel="stylesheet" href="styles/styles.css" type="text/css" />
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"/>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
                 <link rel="stylesheet" href="styles/stammbaum.css" type="text/css" />
             </head>
@@ -35,6 +36,7 @@
                                 <xsl:for-each select = "//generation">
                                     <xsl:for-each select = "Frau|Mann">
                                         <div class="content" style="top: 300px; left:100px;"> 
+                                            <xsl:attribute name="data-geschlecht"><xsl:value-of select="name()"/></xsl:attribute>
                                             <xsl:attribute name="data-vorname"><xsl:value-of select="@vorname"/></xsl:attribute>
                                             <xsl:attribute name="data-nachname"><xsl:value-of select="@nachname"/></xsl:attribute>
                                             <xsl:attribute name="data-geburtsdatum"><xsl:value-of select="@geburtsdatum"/></xsl:attribute>
@@ -47,9 +49,11 @@
                                             <xsl:attribute name="data-familyId"><xsl:value-of select="@familyId"/></xsl:attribute>
                                             
                                             <div class="contentholder">
-                                                <xsl:value-of select="@vorname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="@nachname"/>
+                                                <div class="contenttextholder">
+                                                    <xsl:value-of select="@vorname"/>
+                                                    <xsl:text> </xsl:text>
+                                                    <xsl:value-of select="@nachname"/>
+                                                </div>
                                                 <div class="additionalinfo">
                                                     <div class="additionalinfo-header">
                                                         <xsl:value-of select="@vorname"/>
@@ -115,7 +119,9 @@
                             </xsl:for-each>
                         </div>
                     </div>
+                    <script src="scripts/relationships.js"></script>
                     <script src="scripts/resizelogic.js"></script>
+                    <script src="scripts/fittext.js"></script>
                 </div>
                 <footer>
                     <div class="footer-container">
