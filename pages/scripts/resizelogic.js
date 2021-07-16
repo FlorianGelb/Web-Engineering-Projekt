@@ -19,9 +19,31 @@ else {
     resize.attachEvent("onmousedown", mousedown);
 }
 
-function onLoad(){
-    positionElements(20, 15);
+function reset(){
+    var hlines = document.getElementsByClassName("connectionlinehorizontal");
+    var vlines = document.getElementsByClassName("connectionlinevertical"); 
+    console.log(hlines);
 
+    while(hlines[0]){
+        resize.removeChild(hlines[0]);
+    }
+
+    while(vlines[0]){
+        resize.removeChild(vlines[0]);
+    }
+
+    
+}
+
+function posElement(id1, id2){
+    positionElements(22, id2);
+    convertAbsoluteUnitsToRelative();
+
+
+}
+
+function onLoad(){
+    
     convertAbsoluteUnitsToRelative();
     orientateAdditionalInfo();
 }
