@@ -46,14 +46,4 @@ class Person {
         this.familyId = familyId;
     }
 
-    
-
-    
-
-    
-
-   
-
-
-
 }
