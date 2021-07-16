@@ -19,6 +19,8 @@ else {
     resize.attachEvent("onmousedown", mousedown);
 }
 
+function onLoad(){
+    positionElements(25, 4);
 
 function reset(){
     var hlines = document.getElementsByClassName("connectionlinehorizontal");
@@ -48,6 +50,157 @@ function onLoad(){
     
     convertAbsoluteUnitsToRelative();
     orientateAdditionalInfo();
+
+    alert(getRelation(25, 4));
+}
+
+function getRelation(firstPersonId, secondPersonId){
+    if (firstPersonId == secondPersonId){
+        return "Same Person";
+    }
+    var personList = Array.from(document.getElementsByClassName("content"));
+
+    var personObjectList = []
+
+    var firstPersonIndex, secondPersonIndex;
+
+    for (let i = 0; i < personList.length; i++) {
+        personObjectList.push(new PersonB(personList[i]));
+        if (personObjectList[personObjectList.length - 1].id == firstPersonId) {
+            firstPersonIndex = personObjectList.length - 1;
+        }
+        else if (personObjectList[personObjectList.length - 1].id == secondPersonId) {
+            secondPersonIndex = personObjectList.length - 1;
+        }
+    }
+    if (personObjectList[firstPersonIndex].ehepartner == personObjectList[secondPersonIndex].id){
+        return "Ehepartner";
+    }
+    else if (personObjectList[firstPersonIndex].vater == personObjectList[secondPersonIndex].id){
+        return "Vater";
+    }
+    else if (personObjectList[firstPersonIndex].mutter == personObjectList[secondPersonIndex].id){
+        return "Mutter";
+    }
+    else if (personObjectList[firstPersonIndex].id == personObjectList[secondPersonIndex].mutter || personObjectList[firstPersonIndex].id == personObjectList[secondPersonIndex].vater) {
+        if (personObjectList[secondPersonIndex].geschlecht == "männlich"){
+            return "Sohn";
+        }
+        else {
+            return "Tochter";
+        }
+    }
+    else if (personObjectList[firstPersonIndex].mutter == personObjectList[secondPersonIndex].mutter && personObjectList[firstPersonIndex].vater == personObjectList[secondPersonIndex].vater) {
+        if (personObjectList[secondPersonIndex].geschlecht == "männlich"){
+            return "Bruder";
+        }
+        else {
+            return "Schwester";
+        }
+    }
+
+    for (let i = 0; i < personObjectList.length; i++) {
+        for (let j = 0; j < personObjectList.length; j++) {
+            if (personObjectList[i].vater == personObjectList[j].id) {
+                personObjectList[i].vaterobject = personObjectList[j];
+            }
+            else if (personObjectList[i].mutter == personObjectList[j].id) {
+                personObjectList[i].mutterobject = personObjectList[j];
+            }
+        }
+    }
+
+    var ancestorListpersonOne = constructorFlatAncestorList(personObjectList[firstPersonIndex]);
+    var ancestorListpersonTwo = constructorFlatAncestorList(personObjectList[secondPersonIndex]);
+
+    var verwandt = false;
+    var verwandtschaftsknoten;
+
+    ancestorListpersonOne.forEach(function(person){
+        if (ancestorListpersonTwo.includes(person)){
+            verwandt = true;
+            if (verwandtschaftsknoten != undefined){
+                verwandtschaftsknoten = person;
+            }
+        }
+    })
+
+    if (!verwandt){
+        return "Nicht verwandt"
+    }
+
+    var großelternListOne, großelternListTwo;
+
+    if (getGraphdepth(constructorAncestorList(personObjectList[firstPersonIndex]), 0) > 2){
+        großelternListOne = [personObjectList[firstPersonIndex].vaterobject.vater, personObjectList[firstPersonIndex].vaterobject.mutter, personObjectList[firstPersonIndex].mutterobject.vater, personObjectList[firstPersonIndex].mutterobject.mutter];
+
+        if (großelternListOne.includes(personObjectList[secondPersonIndex].vater) || großelternListOne.includes(personObjectList[secondPersonIndex].mutter)) {
+            if (personObjectList[firstPersonIndex].geschlecht == "männlich") {
+                return "Onkel";
+            }
+            else {
+                return "Tante"
+            }
+        }
+
+        if (großelternListOne.includes(personObjectList[secondPersonIndex].id)){
+            if (personObjectList[secondPersonIndex].geschlecht == "männlich") {
+                return "Opa";
+            }
+            else {
+                return "Oma"
+            }
+        }
+    }
+
+    if (getGraphdepth(constructorAncestorList(personObjectList[secondPersonIndex]), 0) > 2) {
+        großelternListTwo = [personObjectList[secondPersonIndex].vaterobject.vater, personObjectList[secondPersonIndex].vaterobject.mutter, personObjectList[secondPersonIndex].mutterobject.vater, personObjectList[secondPersonIndex].mutterobject.mutter];
+
+        if (großelternListTwo.includes(personObjectList[firstPersonIndex].vater) || großelternListTwo.includes(personObjectList[firstPersonIndex].mutter)) {
+            if (personObjectList[secondPersonIndex].geschlecht == "männlich") {
+                return "Neffe";
+            }
+            else {
+                return "Nichte"
+            }
+        }
+
+        if (großelternListTwo.includes(personObjectList[firstPersonIndex].id)) {
+            return "Enkel";
+        }
+    }
+
+    if (großelternListOne != undefined && großelternListTwo != undefined){
+        großelternListOne.forEach(function(personId){
+            if (großelternListTwo.includes(personId)){
+                if (personObjectList[secondPersonIndex].geschlecht == "männlich"){
+                    return "Cousin";
+                }
+                else {
+                    return "Cousine"
+                }
+            }
+        })  
+    }
+    
+
+    return "Verwandtschaft zu hohen Grades";
+}
+
+function constructorFlatAncestorList(personObject){
+    if (personObject.vater == "" && personObject.mutter == ""){
+        return [personObject];
+    }
+    else if (personObject.vater == "" && personObject.mutter != "") {
+        return [personObject].concat(constructorFlatAncestorList(personObject.vaterobject))
+    }
+    else if (personObject.vater != "" && personObject.mutter == "") {
+        return [personObject].concat(constructorFlatAncestorList(personObject.mutterobject))
+    }
+    else {
+        var zwischenspeicher = [personObject].concat(constructorFlatAncestorList(personObject.vaterobject))
+        return zwischenspeicher.concat(constructorFlatAncestorList(personObject.mutterobject));
+    }
 }
 
 function positionElements(startIdone, startIdtwo){
@@ -75,8 +228,29 @@ function positionElements(startIdone, startIdtwo){
         }
     }
 
-    personObjectList[startObjectOneIndex].object.firstChild.style.backgroundColor = "orange"
     var verschiebung = excecutePositioning(personObjectList[startObjectOneIndex], 0);
+    personObjectList[startObjectOneIndex].object.firstChild.style.backgroundColor = "orange"
+
+    if (personObjectList[startObjectOneIndex].ehepartner != ""){
+        for(let i=0; i<personObjectList.length; i++){
+            if (personObjectList[i].id == personObjectList[startObjectOneIndex].ehepartner){
+                var ehepartner = personObjectList[i];
+                ehepartner.object.style.top = personObjectList[startObjectOneIndex].object.style.top;
+                ehepartner.object.style.left = parseInt(document.defaultView.getComputedStyle(personObjectList[startObjectOneIndex].object).width) + parseInt(document.defaultView.getComputedStyle(personObjectList[startObjectOneIndex].object).left) + 50 + "px";
+                personObjectList[i].angezeigt = true;
+
+                let horizontaldiv = document.createElement('div');
+                horizontaldiv.className = 'connectionlinehorizontal';
+                var width = 50;
+                horizontaldiv.style.width = width + "px";
+                horizontaldiv.style.height = "3px";
+                horizontaldiv.style.top = (parseInt(document.defaultView.getComputedStyle(personObjectList[startObjectOneIndex].object).top) + 10) + "px";
+                horizontaldiv.style.left = ((parseInt(document.defaultView.getComputedStyle(personObjectList[startObjectOneIndex].object).left)+5) + parseInt(document.defaultView.getComputedStyle(personObjectList[startObjectOneIndex].object).width)) + "px";
+                resize.appendChild(horizontaldiv);
+                break;
+            }
+        }
+    }
 
     if (startIdtwo != undefined){
         for (let i = 0; i < personObjectList.length; i++) {
@@ -87,6 +261,42 @@ function positionElements(startIdone, startIdtwo){
 
         verschiebung = excecutePositioning(personObjectList[startObjectTwoIndex], verschiebung+200);
         personObjectList[startObjectTwoIndex].object.firstChild.style.backgroundColor = "green"
+        if (personObjectList[startObjectTwoIndex].ehepartner != "") {
+            for (let i = 0; i < personObjectList.length; i++) {
+                if (personObjectList[i].id == personObjectList[startObjectTwoIndex].ehepartner) {
+                    var ehepartner;
+                    var referenceObject;
+                    if (personObjectList[i].angezeigt) {
+                        ehepartner = personObjectList[i].object.cloneNode(true)
+                        ehepartner.setAttribute("clone", personObjectList[i].id)
+                        referenceObject = document.querySelector("[clone='" + personObjectList[startObjectTwoIndex].id + "']");
+                    }
+                    else {
+                        ehepartner = personObjectList[i].object
+                        personObjectList[i].angezeigt = true;
+                        referenceObject = personObjectList[startObjectTwoIndex].object
+                    }
+
+                    
+                    
+                    ehepartner.style.top = referenceObject.style.top;
+                    ehepartner.style.left = parseInt(document.defaultView.getComputedStyle(referenceObject).width) + parseInt(document.defaultView.getComputedStyle(referenceObject).left) + 50 + "px";
+                    if (personObjectList[i].angezeigt) {
+                        resize.appendChild(ehepartner);
+                    }
+
+                    let horizontaldiv = document.createElement('div');
+                    horizontaldiv.className = 'connectionlinehorizontal';
+                    var width = 50;
+                    horizontaldiv.style.width = width + "px";
+                    horizontaldiv.style.height = "3px";
+                    horizontaldiv.style.top = (parseInt(document.defaultView.getComputedStyle(referenceObject).top) + 10) + "px";
+                    horizontaldiv.style.left = ((parseInt(document.defaultView.getComputedStyle(referenceObject).left) + 5) + parseInt(document.defaultView.getComputedStyle(referenceObject).width)) + "px";
+                    resize.appendChild(horizontaldiv);
+                    break;
+                }
+            }
+        }
     }
 
     
@@ -168,7 +378,7 @@ function placeLines(personObject, verschiebung, rekursionstiefe, maxWidth, posit
         horizontaldiv.style.width = width + "px";
         horizontaldiv.style.height = "3px";
         horizontaldiv.style.top = (parseInt(document.defaultView.getComputedStyle(object).top) -140) + "px";
-        horizontaldiv.style.left = (((parseInt(document.defaultView.getComputedStyle(object).left)+7) + parseInt(document.defaultView.getComputedStyle(personObject[1][0][0].object).width) * 0.5) - width*0.5) + "px";
+        horizontaldiv.style.left = (((parseInt(document.defaultView.getComputedStyle(object).left)+4) + parseInt(document.defaultView.getComputedStyle(personObject[1][0][0].object).width) * 0.5) - width*0.5) + "px";
         resize.appendChild(horizontaldiv);
 
         

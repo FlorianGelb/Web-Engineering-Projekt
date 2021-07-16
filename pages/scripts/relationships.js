@@ -9,6 +9,7 @@ class PersonB {
         this.mutterobject = undefined;
         this.vater = htmlobject.getAttribute("data-vater");
         this.vaterobject = undefined;
+        this.geschlecht = htmlobject.getAttribute("data-geschlecht")
         this.angezeigt = false;
     }
 }
