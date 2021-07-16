@@ -19,9 +19,6 @@ else {
     resize.attachEvent("onmousedown", mousedown);
 }
 
-function onLoad(){
-    positionElements(25, 4);
-
 function reset(){
     var hlines = document.getElementsByClassName("connectionlinehorizontal");
     var vlines = document.getElementsByClassName("connectionlinevertical"); 
@@ -47,7 +44,7 @@ function posElement(id1, id2){
 }
 
 function onLoad(){
-    
+    positionElements(25, 4);
     convertAbsoluteUnitsToRelative();
     orientateAdditionalInfo();
 
