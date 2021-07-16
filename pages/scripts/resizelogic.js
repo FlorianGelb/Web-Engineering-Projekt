@@ -19,9 +19,13 @@ else {
     resize.attachEvent("onmousedown", mousedown);
 }
 
-function onLoad(){
-    positionElements(20, 15);
+function posElement(id1, id2){
+    positionElements(id1, id2);
 
+}
+
+function onLoad(){
+    
     convertAbsoluteUnitsToRelative();
     orientateAdditionalInfo();
 }

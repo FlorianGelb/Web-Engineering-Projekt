@@ -38,19 +38,44 @@
           <label for="mother">Wählen Sie die Mutter aus:</label>
           <select name="mother" id="mother" form="newPersonModal">
             <option value="unknown"> ? </option>
-            <option value="xxxx">xxxx</option>
+            <xsl:for-each select = "//Person">
+            <xsl:if test="@geschlecht = 'weiblich'">
+             <option>
+              <xsl:attribute name="value"><xsl:value-of select="@id"/></xsl:attribute>
+              <xsl:value-of select="@vorname"/>
+              <xsl:text>&#xa;</xsl:text>
+              <xsl:value-of select="@nachname"/>
+              </option>
+              </xsl:if>
+              </xsl:for-each>
           </select>
           <br></br>
           <label for="father">Wählen Sie den Vater aus:</label>
           <select name="father" id="father" form="newPersonModal">
             <option value="unknown"> ? </option>
-            <option value="xxxx">xxxx</option>
+            <xsl:for-each select = "//Person">
+            <xsl:if test="@geschlecht = 'männlich'">
+             <option>
+              <xsl:attribute name="value"><xsl:value-of select="@id"/></xsl:attribute>
+              <xsl:value-of select="@vorname"/>
+              <xsl:text>&#xa;</xsl:text>
+              <xsl:value-of select="@nachname"/>
+              </option>
+              </xsl:if>
+              </xsl:for-each>
           </select>
           <br></br>
           <label for="spouse">Wählen Sie den Ehepartner aus:</label>
           <select name="spouse" id="spouse" form="newPersonModal">
             <option value="none">-</option>
-            <option value="xxxx">xxxx</option>
+            <xsl:for-each select = "//Person">
+             <option>
+              <xsl:attribute name="value"><xsl:value-of select="@id"/></xsl:attribute>
+              <xsl:value-of select="@vorname"/>
+              <xsl:text>&#xa;</xsl:text>
+              <xsl:value-of select="@nachname"/>
+              </option>
+              </xsl:for-each>
           </select>
 
         </div>
@@ -91,7 +116,6 @@
                     <div class="resizecontainer">
                         <div class="resize">
                             <xsl:for-each select = "//familie">
-                                <xsl:for-each select = "//generation">
                                     <xsl:for-each select = "Person">
                                         <div class="content" style="top: 300px; left:100px;"> 
                                             <xsl:attribute name="data-geschlecht"><xsl:value-of select="@geschlecht"/></xsl:attribute>
@@ -173,15 +197,15 @@
                                             </div>
                                         </div>
                                     </xsl:for-each>
-                                </xsl:for-each>
                             </xsl:for-each>
                         </div>
                     </div>
+                    <script src="scripts/person.js"></script>
                     <script src="scripts/relationships.js"></script>
                     <script src="scripts/resizelogic.js"></script>
-                    <script src="scripts/person.js"></script>
-                    <script src="scripts/modalButton.js"></script>
                     <script src="scripts/get_input.js"></script>
+                    <script src="scripts/modalButton.js"></script>
+                    
                     <script src="scripts/fittext.js"></script>
                 </div>
 
@@ -204,19 +228,44 @@
           <label for="mother">Wählen Sie die Mutter aus:</label>
           <select name="mother" id="mother1" form="newPersonModal">
             <option value="unknown"> ? </option>
-            <option value="xxxx">xxxx</option>
+            <xsl:for-each select = "//Person">
+            <xsl:if test="@geschlecht = 'weiblich'">
+             <option>
+              <xsl:attribute name="value"><xsl:value-of select="@id"/></xsl:attribute>
+              <xsl:value-of select="@vorname"/>
+              <xsl:text>&#xa;</xsl:text>
+              <xsl:value-of select="@nachname"/>
+              </option>
+              </xsl:if>
+              </xsl:for-each>
           </select>
           <br></br>
           <label for="father">Wählen Sie den Vater aus:</label>
           <select name="father" id="father1" form="newPersonModal">
             <option value="unknown"> ? </option>
-            <option value="xxxx">xxxx</option>
+            <xsl:for-each select = "//Person">
+            <xsl:if test="@geschlecht = 'männlich'">
+             <option>
+              <xsl:attribute name="value"><xsl:value-of select="@id"/></xsl:attribute>
+              <xsl:value-of select="@vorname"/>
+              <xsl:text>&#xa;</xsl:text>
+              <xsl:value-of select="@nachname"/>
+              </option>
+              </xsl:if>
+              </xsl:for-each>
           </select>
           <br></br>
           <label for="spouse">Wählen Sie den Ehepartner aus:</label>
           <select name="spouse" id="spouse1" form="newPersonModal">
             <option value="none">-</option>
-            <option value="xxxx">xxxx</option>
+            <xsl:for-each select = "//Person">
+             <option>
+              <xsl:attribute name="value"><xsl:value-of select="@id"/></xsl:attribute>
+              <xsl:value-of select="@vorname"/>
+              <xsl:text>&#xa;</xsl:text>
+              <xsl:value-of select="@nachname"/>
+              </option>
+              </xsl:for-each>
           </select>
 
         </div>
@@ -257,19 +306,44 @@
           <label for="mother">Wählen Sie die Mutter aus:</label>
           <select name="mother" id="mother2" form="newPersonModal">
             <option value="unknown"> ? </option>
-            <option value="xxxx">xxxx</option>
+            <xsl:for-each select = "//Person">
+            <xsl:if test="@geschlecht = 'weiblich'">
+             <option>
+              <xsl:attribute name="value"><xsl:value-of select="@id"/></xsl:attribute>
+              <xsl:value-of select="@vorname"/>
+              <xsl:text>&#xa;</xsl:text>
+              <xsl:value-of select="@nachname"/>
+              </option>
+              </xsl:if>
+              </xsl:for-each>
           </select>
           <br></br>
           <label for="father">Wählen Sie den Vater aus:</label>
           <select name="father" id="father2" form="newPersonModal">
             <option value="unknown"> ? </option>
-            <option value="xxxx">xxxx</option>
+            <xsl:for-each select = "//Person">
+            <xsl:if test="@geschlecht = 'männlich'">
+             <option>
+              <xsl:attribute name="value"><xsl:value-of select="@id"/></xsl:attribute>
+              <xsl:value-of select="@vorname"/>
+              <xsl:text>&#xa;</xsl:text>
+              <xsl:value-of select="@nachname"/>
+              </option>
+              </xsl:if>
+              </xsl:for-each>
           </select>
           <br></br>
           <label for="spouse">Wählen Sie den Ehepartner aus:</label>
           <select name="spouse" id="spouse2" form="newPersonModal">
             <option value="none">-</option>
-            <option value="xxxx">xxxx</option>
+            <xsl:for-each select = "//Person">
+             <option>
+              <xsl:attribute name="value"><xsl:value-of select="@id"/></xsl:attribute>
+              <xsl:value-of select="@vorname"/>
+              <xsl:text>&#xa;</xsl:text>
+              <xsl:value-of select="@nachname"/>
+              </option>
+              </xsl:for-each>
           </select>
 
         </div>

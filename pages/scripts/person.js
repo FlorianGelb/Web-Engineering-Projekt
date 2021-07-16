@@ -3,46 +3,46 @@ class Person {
     constructor() { }
 
     vorname(firstName) {
-        this.vorname = firstName;
+        this.vname = firstName;
     }
 
     nachname(familyName) {
-        this.nachname = familyName;
+        this.nname = familyName;
     }
 
     geschlecht(gender){
-        this.geschlecht = gender;
+        this.gschlecht = gender;
     }
 
     geburtsdatum(birthDate) {
-        this.geburtsdatum = birthDate;
+        this.geburtsdat = birthDate;
     }
 
     geburtsort(birthPlace) {
-        this.geburtsort = birthPlace;
+        this.gebort = birthPlace;
     }
     
     todesdatum(deathDate) {
-        this.todesdatum = deathDate;
+        this.todesdat = deathDate;
     }
 
     ehepartner(spouse) {
-        this.ehepartner = spouse;
+        this.ehepartnr = spouse;
     }
 
     mutter(mother) {
-        this.mutter = mother;
+        this.mttr = mother;
     }
 
     vater(father) {
-        this.vater = father;
+        this.vtr = father;
     }
 
-    id(id){
-        this.id = id;
+    id(Id){
+        this.ID = Id;
     }
 
-    familyId(familyId){
+    famId(familyId){
         this.familyId = familyId;
     }
 
