@@ -200,13 +200,6 @@
                             </xsl:for-each>
                         </div>
                     </div>
-                    <script src="scripts/person.js"></script>
-                    <script src="scripts/relationships.js"></script>
-                    <script src="scripts/resizelogic.js"></script>
-                    <script src="scripts/get_input.js"></script>
-                    <script src="scripts/modalButton.js"></script>
-                    
-                    <script src="scripts/fittext.js"></script>
                 </div>
 
     <div>
@@ -404,6 +397,13 @@
                 </footer>
                 
             </body>
+                                <script src="scripts/person.js"></script>
+                    <script src="scripts/relationships.js"></script>
+                    <script src="scripts/resizelogic.js"></script>
+                    <script src="scripts/get_input.js"></script>
+                    <script src="scripts/modalButton.js"></script>
+                    
+                    <script src="scripts/fittext.js"></script>
         </html>
     </xsl:template>
 </xsl:stylesheet>
