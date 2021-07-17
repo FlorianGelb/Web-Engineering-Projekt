@@ -30,6 +30,11 @@
             <br></br>
             <label for="familyName">Nachname:</label>
             <input type="text" id="familyName" name="familyName"></input>
+            <br></br>
+            <select id="Geschlecht">
+            <option value="männlich">Männlich</option>
+            <option value="weiblich">Weiblich</option>
+</select>
           </form>
         </div>
         <div class="div2">

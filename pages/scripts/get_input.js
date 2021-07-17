@@ -9,19 +9,6 @@ var newPers = new Person();
 function checkIDs(pers, spers){
   var equal = true;
 
-
-  if(pers.pobject.vname == "Stacy" && pers.pobject.nname == "Lee"){
-      console.log(pers.pobject);
-    if(pers.pobject instanceof Person && spers instanceof Person){
-      for(var key in pers.pobject) {
-          console.log(pers.pobject[key], spers[key]);
-          equal = equal && pers.pobject[key] === spers[key];
-      }
-    
-
-  }
-
-  }
   if(pers.pobject instanceof Person && spers instanceof Person){
   for(var key in pers.pobject) {
       equal = equal && pers.pobject[key] === spers[key];
@@ -45,6 +32,8 @@ btn.onclick = function () {
     person1.vorname(document.getElementById("firstName1").value);
     person2.vorname(document.getElementById("firstName2").value);
     newPers.vorname(document.getElementById("firstName").value);
+
+    newPers.geschlecht(document.getElementById("Geschlecht").value)
 
     person1.nachname(document.getElementById("familyName1").value);
     person2.nachname(document.getElementById("familyName2").value);
@@ -88,6 +77,7 @@ btn.onclick = function () {
       checkIDs(np, person2);
 
   }
+  console.log(newPers);
   posElement(person1.ID, person2.ID);
 }
 
