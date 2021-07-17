@@ -19,9 +19,33 @@ else {
     resize.attachEvent("onmousedown", mousedown);
 }
 
-function onLoad(){
-    positionElements(20, 15);
 
+function reset(){
+    var hlines = document.getElementsByClassName("connectionlinehorizontal");
+    var vlines = document.getElementsByClassName("connectionlinevertical"); 
+    console.log(hlines);
+
+    while(hlines[0]){
+        resize.removeChild(hlines[0]);
+    }
+
+    while(vlines[0]){
+        resize.removeChild(vlines[0]);
+    }
+
+    
+}
+
+
+function posElement(id1, id2){
+    positionElements(22, id2);
+    convertAbsoluteUnitsToRelative();
+
+
+}
+
+function onLoad(){
+    
     convertAbsoluteUnitsToRelative();
     orientateAdditionalInfo();
 }
@@ -51,7 +75,7 @@ function positionElements(startIdone, startIdtwo){
         }
     }
 
-
+    personObjectList[startObjectOneIndex].object.firstChild.style.backgroundColor = "orange"
     var verschiebung = excecutePositioning(personObjectList[startObjectOneIndex], 0);
 
     if (startIdtwo != undefined){
@@ -62,6 +86,7 @@ function positionElements(startIdone, startIdtwo){
         }
 
         verschiebung = excecutePositioning(personObjectList[startObjectTwoIndex], verschiebung+200);
+        personObjectList[startObjectTwoIndex].object.firstChild.style.backgroundColor = "green"
     }
 
     
@@ -96,13 +121,13 @@ function positionGraph(personObject, rekursionstiefe, depth, maxWidth, verschieb
     if (!personObject[0].angezeigt){
         personObject[0].angezeigt = true;
         personObject[0].object.style.top = verschiebung + (150*(depth-rekursionstiefe)) + "px";
-        var left = (maxWidth * (position*1/(Math.pow(2, rekursionstiefe+1))))+200;
+        var left = (maxWidth * (position*1/(Math.pow(2, rekursionstiefe+1))));
         personObject[0].object.style.left = left + "px";
     }
     else {
         var clonedObject = personObject[0].object.cloneNode(true);
         clonedObject.style.top = verschiebung + (150 * (depth - rekursionstiefe)) + "px";
-        var left = (maxWidth * (position * 1 / (Math.pow(2, rekursionstiefe + 1))))+200;
+        var left = (maxWidth * (position * 1 / (Math.pow(2, rekursionstiefe + 1))));
         clonedObject.style.left = left + "px";
         clonedObject.setAttribute("clone", personObject[0].id)
         resize.appendChild(clonedObject);
