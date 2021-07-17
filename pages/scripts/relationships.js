@@ -10,6 +10,29 @@ class PersonB {
         this.vater = htmlobject.getAttribute("data-vater");
         this.vaterobject = undefined;
         this.angezeigt = false;
+        this.gdatum = this.object.getAttribute("data-geburtsdatum");
+        this.gort =   this.object.getAttribute("data-geburtsort");
+        this.ddatum =   this.object.getAttribute("data-todesdatum");
+        this.pobject = new Person();
+
+        this.pobject.vorname( this.vorname);
+
+        this.pobject.nachname(this.nachname);
+
+        this.pobject.mutter(this.mutter);
+
+        this.pobject.vater(this.vater);
+
+        this.pobject.ehepartner(this.ehepartner);
+
+        this.pobject.geburtsort(this.gort);
+
+        this.pobject.geburtsdatum(this.gdatum);
+
+        this.pobject.todesdatum(document.getElementById("deathDate1").value);
+
+
+
     }
 }
 

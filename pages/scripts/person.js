@@ -27,14 +27,26 @@ class Person {
     }
 
     ehepartner(spouse) {
+        if(spouse === "none" || spouse === undefined ){
+            this.ehepartnr = "";
+            return;
+        }
         this.ehepartnr = spouse;
     }
 
     mutter(mother) {
+        if(mother == "unknown"){
+            this.mttr = "";
+            return;
+        }
         this.mttr = mother;
     }
 
     vater(father) {
+        if(father == "unknown"){
+            this.vtr = "";
+            return;
+        }
         this.vtr = father;
     }
 

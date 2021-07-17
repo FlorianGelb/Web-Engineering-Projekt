@@ -4,6 +4,7 @@ const scaleFactor = 10; // minsize muss durch scaleFactor teilbar sein
 const resize = document.querySelector(".resize");
 var depthcounter = []
 
+var personList = Array.from(document.getElementsByClassName("content"));
 
 window.addEventListener("load", onLoad);
 
@@ -32,26 +33,61 @@ function reset(){
     while(vlines[0]){
         resize.removeChild(vlines[0]);
     }
+    
+    var perslist = []
+
+    for (let i=0; i<personList.length; i++){
+        perslist.push(new PersonB(personList[i]));
+    }
+
+    console.log(perslist.length);
+    for (let i=0; i<perslist.length; i++){
+        if (perslist[i].object.style.visibility != "hidden"){
+            perslist[i].object.style.visibility = "hidden";
+            perslist[i].object.firstChild.style.visibility = "hidden";
+        }
+        
+        
+    }
+
+    toggleClones(false);
 
     
 }
 
+function toggleClones(t){
+object = document.querySelectorAll("[clone]");
+for(let o of object){
+    console.log(o);
+    if(t){
+        o.style.visibility = "visible";
+        o.firstChild.style.visibility = "visible";
+        return 0;
+    }
+    console.log(o);
+    o.parentElement.removeChild(o);
+    
+}
+}
+
 
 function posElement(id1, id2){
-    positionElements(22, id2);
+    reset();
+    positionElements(id1, id2);
     convertAbsoluteUnitsToRelative();
+    
 
 
 }
 
 function onLoad(){
-    
+    reset();
     convertAbsoluteUnitsToRelative();
     orientateAdditionalInfo();
+
 }
 
 function positionElements(startIdone, startIdtwo){
-    var personList = Array.from(document.getElementsByClassName("content"));
 
     var personObjectList = []
 
@@ -92,10 +128,16 @@ function positionElements(startIdone, startIdtwo){
     
 
     for (let i=0; i<personObjectList.length; i++){
-        if (personObjectList[i].angezeigt == false){
-            personObjectList[i].object.style.visibility = "hidden";
+        if (personObjectList[i].angezeigt == true){
+            personObjectList[i].object.style.visibility = "visible";
+            personObjectList[i].object.firstChild.style.visibility = "visible";
+
         }
+
     }
+    toggleClones(true);
+
+            
 
 }
 
