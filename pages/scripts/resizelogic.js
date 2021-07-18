@@ -39,7 +39,6 @@ function reset(){
         perslist.push(new PersonB(personList[i]));
     }
 
-    console.log(perslist.length);
     for (let i=0; i<perslist.length; i++){
         if (perslist[i].object.style.visibility != "hidden"){
             perslist[i].object.style.visibility = "hidden";
@@ -55,17 +54,17 @@ function reset(){
 }
 
 function toggleClones(t){
-object = document.querySelectorAll("[clone]");
+object = Array.from(document.querySelectorAll("[clone]"));
+console.log(object);
 for(let o of object){
-    console.log(o);
     if(t){
         o.style.visibility = "visible";
         o.firstChild.style.visibility = "visible";
-        return 0;
+
     }
-    console.log(o);
+    else{
     o.parentElement.removeChild(o);
-    
+    }
 }
 }
 
@@ -74,7 +73,7 @@ function posElement(id1, id2){
     reset();
     positionElements(id1, id2);
     convertAbsoluteUnitsToRelative();
-      alert(getRelation(id1, id2));
+    alert(getRelation(id1, id2));
     
 
 
@@ -203,7 +202,7 @@ function getRelation(firstPersonId, secondPersonId){
     }
 
     if (großelternListOne != undefined && großelternListTwo != undefined){
-        großelternListOne.forEach(function(personId){
+        for(const personId of großelternListOne){
             if (großelternListTwo.includes(personId)){
                 if (personObjectList[secondPersonIndex].geschlecht == "männlich"){
                     return "Cousin";
@@ -212,11 +211,11 @@ function getRelation(firstPersonId, secondPersonId){
                     return "Cousine"
                 }
             }
-        })  
+        }  
     }
     
 
-    return "Verwandtschaft zu hohen Grades";
+    return "Verwandtschaft zu einem höheren Grad";
 }
 
 function constructorFlatAncestorList(personObject){

@@ -405,6 +405,7 @@
                                 <script src="scripts/person.js"></script>
                     <script src="scripts/relationships.js"></script>
                     <script src="scripts/resizelogic.js"></script>
+                    <script src="scripts/editXml.js"></script>
                     <script src="scripts/get_input.js"></script>
                     <script src="scripts/modalButton.js"></script>
                     

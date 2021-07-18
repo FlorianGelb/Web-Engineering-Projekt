@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="stammbaum2.xsl"?>
+<!DOCTYPE stammbaum [
+<!ELEMENT stammbaum (familie)+>
+<!ELEMENT familie (Person)+>
+<!ELEMENT Person EMPTY>
+<!ATTLIST Person vorname CDATA #REQUIRED>
+<!ATTLIST Person nachname CDATA #REQUIRED>
+<!ATTLIST Person geschlecht CDATA #REQUIRED>
+<!ATTLIST Person geburtsdatum CDATA #REQUIRED>
+<!ATTLIST Person geburtsort CDATA #REQUIRED>
+<!ATTLIST Person todesdatum CDATA #IMPLIED>
+<!ATTLIST Person ehepartner CDATA #IMPLIED>
+<!ATTLIST Person mutter CDATA #IMPLIED>
+<!ATTLIST Person vater CDATA #IMPLIED>
+<!ATTLIST Person id CDATA #REQUIRED>
+<!ATTLIST Person familyId CDATA #IMPLIED>
+]>
+<stammbaum>
+    <familie>
+            <Person vorname="Alexandra" nachname="Ewing" geschlecht="weiblich" geburtsdatum="1936-01-15" geburtsort="Laken" todesdatum="" ehepartner="" mutter="16" vater="15" id="54" familyId=""/>
+            <Person vorname="Brenden" nachname="Ewing" geschlecht="männlich" geburtsdatum="1946-06-01" geburtsort="Enna" todesdatum="" ehepartner="" mutter="16" vater="15" id="78" familyId=""/>
+            <Person vorname="Jasmine" nachname="Lee" geschlecht="weiblich" geburtsdatum="1948-08-11" geburtsort="Bearberry" todesdatum="" ehepartner="" mutter="5" vater="6" id="13" familyId=""/>
+            <Person vorname="Finn" nachname="Lee" geschlecht="männlich" geburtsdatum="1916-12-16" geburtsort="Lacombe County" todesdatum="" ehepartner="" mutter="5" vater="6" id="14" familyId=""/>
+            <Person vorname="Arthur" nachname="Ewing" geschlecht="männlich" geburtsdatum="1958-07-19" geburtsort="Pereira" todesdatum="" ehepartner="16" mutter="" vater="" id="15" familyId=""/>
+            <Person vorname="Kylee" nachname="Lee" geschlecht="weiblich" geburtsdatum="1998-12-4" geburtsort="Acireale" todesdatum="" ehepartner="15" mutter="5" vater="6" id="16" familyId=""/>
+
+
+            <Person vorname="Stacy" nachname="Lee" geschlecht="weiblich" geburtsdatum="1941-09-26" geburtsort="Colobraro" todesdatum="" ehepartner="" mutter="7" vater="8" id="17" familyId=""/>
+            <Person vorname="Hilda" nachname="Lee" geschlecht="weiblich" geburtsdatum="1916-07-28" geburtsort="Lavoir" todesdatum="" ehepartner="" mutter="7" vater="8" id="18" familyId=""/>
+            <Person vorname="Amos" nachname="Lee" geschlecht="männlich" geburtsdatum="1944-03-06" geburtsort="Ninhue" todesdatum="" ehepartner="20" mutter="7" vater="8" id="19" familyId=""/>
+            <Person vorname="Halla" nachname="Watkins" geschlecht="weiblich" geburtsdatum="1917-12-21" geburtsort="Lille" todesdatum="" ehepartner="19" mutter="" vater="" id="20" familyId=""/>
+
+
+            <Person vorname="Bert" nachname="Casey" geschlecht="männlich" geburtsdatum="1969-07-09" geburtsort="Palakkad" todesdatum="" ehepartner="" mutter="9" vater="10" id="21" familyId=""/>
+            <Person vorname="Aaron" nachname="Casey" geschlecht="männlich" geburtsdatum="1910-01-26" geburtsort="Tampa" todesdatum="" ehepartner="" mutter="9" vater="10" id="22" familyId=""/>
+            <Person vorname="Ian" nachname="Casey" geschlecht="männlich" geburtsdatum="1944-01-03" geburtsort="Otricoli" todesdatum="" ehepartner="" mutter="9" vater="10" id="23" familyId=""/>
+
+
+            <Person vorname="Hilary" nachname="Lee" geschlecht="weiblich" geburtsdatum="1945-12-06" geburtsort="Pike Creek" todesdatum="" ehepartner="" mutter="11" vater="12" id="24" familyId=""/>
+            <Person vorname="Lucas" nachname="Lee" geschlecht="männlich" geburtsdatum="1987-03-22" geburtsort="Shchyolkovo" todesdatum="" ehepartner="" mutter="11" vater="12" id="25" familyId=""/>
+
+            <Person vorname="Amela" nachname="Riddle" geschlecht="weiblich" geburtsdatum="1964-07-03" geburtsort="East Linton" todesdatum="" ehepartner="6" mutter="" vater="" id="5" familyId=""/>
+            <Person vorname="Allen" nachname="Lee" geschlecht="männlich" geburtsdatum="1983-04-18" geburtsort="Doues" todesdatum="" ehepartner="5" mutter="1" vater="2" id="6" familyId=""/>
+
+            <Person vorname="Mara" nachname="Rutledge" geschlecht="weiblich" geburtsdatum="1965-07-16" geburtsort="Wood Buffalo" todesdatum="" ehepartner="8" mutter="" vater="" id="7" familyId=""/>
+            <Person vorname="Otto" nachname="Lee" geschlecht="männlich" geburtsdatum="1908-06-04" geburtsort="Tucson" todesdatum="" ehepartner="7" mutter="1" vater="2" id="8" familyId=""/>
+
+            <Person vorname="Rebecca" nachname="Lee" geschlecht="weiblich" geburtsdatum="1985-02-12" geburtsort="Blue Mountains" todesdatum="" ehepartner="10" mutter="1" vater="2" id="9" familyId=""/>
+            <Person vorname="Dale" nachname="Casey" geschlecht="männlich" geburtsdatum="1998-12-22" geburtsort="Tielen" todesdatum="" ehepartner="9" mutter="" vater="" id="10" familyId=""/>
+
+            <Person vorname="Jena" nachname="Fry" geschlecht="weiblich" geburtsdatum="1983-05-10" geburtsort="Rodez" todesdatum="" ehepartner="12" mutter="3" vater="4" id="11" familyId=""/>
+            <Person vorname="Martin" nachname="Lee" geschlecht="männlich" geburtsdatum="1940-10-16" geburtsort="Meix-le-Tige" todesdatum="" ehepartner="11" mutter="1" vater="2" id="12" familyId=""/>
+
+            <Person vorname="Martina" nachname="Kirk" geschlecht="weiblich" geburtsdatum="1995-02-02" geburtsort="Delft" todesdatum="" ehepartner="2" mutter="" vater="" id="1" familyId=""/>
+            <Person vorname="Quinn" nachname="Lee" geschlecht="männlich" geburtsdatum="1987-03-11" geburtsort="Itterbeek" todesdatum="" ehepartner="1" mutter="" vater="" id="2" familyId=""/>
+
+            <Person vorname="Addison" nachname="Larson" geschlecht="weiblich" geburtsdatum="1951-08-18" geburtsort="Saint-Dizier" todesdatum="" ehepartner="4" mutter="" vater="" id="3" familyId=""/>
+            <Person vorname="Guy" nachname="Fry" geschlecht="männlich" geburtsdatum="1963-04-04" geburtsort="Merritt" todesdatum="" ehepartner="3" mutter="" vater="" id="4" familyId=""/>
+ 
+    </familie>
+    <familie>
+            <Person vorname="Arthur" nachname="nichtEwing" geschlecht="männlich" geburtsdatum="1958-07-19" geburtsort="Pereira" todesdatum="" ehepartner="16" mutter="" vater="" id="100" familyId="2"/>
+            <Person vorname="Kylee" nachname="nichtLee" geschlecht="weiblich" geburtsdatum="1998-12-15" geburtsort="Acireale" todesdatum="" ehepartner="15" mutter="5" vater="6" id="200" familyId="2"/>
+        </familie>
+     <familie>
+            <Person vorname="nichtArthur" nachname="Ewing" geschlecht="männlich" geburtsdatum="1958-07-20" geburtsort="Pereira" todesdatum="" ehepartner="16" mutter="" vater="" id="300" familyId="1"/>
+            <Person vorname="nichtKylee" nachname="Lee" geschlecht="weiblich" geburtsdatum="1998-12-16" geburtsort="Acireale" todesdatum="" ehepartner="15" mutter="5" vater="6" id="400" familyId="1"/>
+     </familie>
+</stammbaum>

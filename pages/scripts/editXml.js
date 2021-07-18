@@ -29,17 +29,17 @@ function generatePerson(newPerson) {
     parseString(xml, function (err, data) {
 
 
-        if (newPerson.mutter == "" && newPerson.vater == "" && newPerson.ehepartner == "") {
-            var newFamile = { Person: [{ '$': { vorname: newPerson.vorname, nachname: newPerson.nachname, geschlecht: newPerson.geschlecht, geburtsdatum: newPerson.geburtsdatum, geburtsort: newPerson.geburtsort, todesdatum: newPerson.todesdatum, ehepartner: newPerson.ehepartner, mutter: newPerson.mutter, vater: newPerson.vater, id: newPerson.id, familyId: toString(data.stammbaum.familie.length) } }] }
+        if (newPerson.mttr == "" && newPerson.vtr == "" && newPerson.ehepartnr == "") {
+            var newFamile = { Person: [{ '$': { vorname: newPerson.vname, nachname: newPerson.nname, geschlecht: newPerson.gschlecht, geburtsdatum: newPerson.geburtsdat, geburtsort: newPerson.gebort, todesdatum: newPerson.todesdat, ehepartner: newPerson.ehepartnr, mutter: newPerson.mttr, vater: newPerson.vtr, id: newPerson.ID, familyId: toString(data.stammbaum.familie.length) } }] }
             data.stammbaum.familie.push(newFamile);
             saveXml(data);
             return;
         }
         // just mother
-        else if (newPerson.mutter != "" && newPerson.ehepartner == "") {
-            var mutter = loop(data.stammbaum.familie, newPerson.mutter);
+        else if (newPerson.mttr != "" && newPerson.ehepartnr == "") {
+            var mutter = loop(data.stammbaum.familie, newPerson.mttr);
             if (mutter != undefined) {
-                var personToPush = { '$': { vorname: newPerson.vorname, nachname: newPerson.nachname, geschlecht: newPerson.geschlecht, geburtsdatum: newPerson.geburtsdatum, geburtsort: newPerson.geburtsort, todesdatum: newPerson.todesdatum, ehepartner: newPerson.ehepartner, mutter: newPerson.mutter, vater: newPerson.vater, id: newPerson.id, familyId: mutter.familyId } }
+                var personToPush = { '$': { vorname: newPerson.vname, nachname: newPerson.nname, geschlecht: newPerson.gschlecht, geburtsdatum: newPerson.geburtsdat, geburtsort: newPerson.gebort, todesdatum: newPerson.todesdat, ehepartner: newPerson.ehepartnr, mutter: newPerson.mttr, vater: newPerson.vtr, id: newPerson.ID, familyId: mutter.familyId } }
                 data.stammbaum.familie[parseInt(mutter.familyId)].Person.push(personToPush);
                 saveXml(data);
                 return;
@@ -48,10 +48,10 @@ function generatePerson(newPerson) {
             }
         }
         // just father
-        else if (newPerson.vater != "" && newPerson.ehepartner == "") {
-            var vater = loop(data.stammbaum.familie, newPerson.vater);
+        else if (newPerson.vtr != "" && newPerson.ehepartnr == "") {
+            var vater = loop(data.stammbaum.familie, newPerson.vtr);
             if (vater != undefined) {
-                var personToPush = { '$': { vorname: newPerson.vorname, nachname: newPerson.nachname, geschlecht: newPerson.geschlecht, geburtsdatum: newPerson.geburtsdatum, geburtsort: newPerson.geburtsort, todesdatum: newPerson.todesdatum, ehepartner: newPerson.ehepartner, mutter: newPerson.mutter, vater: newPerson.vater, id: newPerson.id, familyId: vater.familyId } }
+                var personToPush = { '$': { vorname: newPerson.vname, nachname: newPerson.nname, geschlecht: newPerson.gschlecht, geburtsdatum: newPerson.geburtsdat, geburtsort: newPerson.gebort, todesdatum: newPerson.todesdat, ehepartner: newPerson.ehepartnr, mutter: newPerson.mttr, vater: newPerson.vtr, id: newPerson.ID, familyId: vater.familyId } }
                 data.stammbaum.familie[parseInt(vater.familyId)].Person.push(personToPush);
                 saveXml(data);
                 return;
@@ -59,16 +59,16 @@ function generatePerson(newPerson) {
                 alert("Der ausgewählte Vater konnte nicht gefunden werden!");
             }
         }
-        else if (newPerson.ehepartner != "") {
-            var ehepartner = loop(data.stammbaum.familie, newPerson.ehepartner);
+        else if (newPerson.ehepartnr != "") {
+            var ehepartner = loop(data.stammbaum.familie, newPerson.ehepartnr);
             if (ehepartner != undefined) {
-                if (newPerson.mutter == "" && newPerson.vater == "") {
-                    var personToPush = { '$': { vorname: newPerson.vorname, nachname: newPerson.nachname, geschlecht: newPerson.geschlecht, geburtsdatum: newPerson.geburtsdatum, geburtsort: newPerson.geburtsort, todesdatum: newPerson.todesdatum, ehepartner: newPerson.ehepartner, mutter: newPerson.mutter, vater: newPerson.vater, id: newPerson.id, familyId: ehepartner.familyId } }
+                if (newPerson.mttr == "" && newPerson.vtr == "") {
+                    var personToPush = { '$': { vorname: newPerson.vname, nachname: newPerson.nname, geschlecht: newPerson.gschlecht, geburtsdatum: newPerson.geburtsdat, geburtsort: newPerson.gebort, todesdatum: newPerson.todesdat, ehepartner: newPerson.ehepartnr, mutter: newPerson.mttr, vater: newPerson.vtr, id: newPerson.ID, familyId: vater.familyId } }
                     data.stammbaum.familie[parseInt(ehepartner.familyId)].Person.push(personToPush);
                     saveXml(data);
                     return;
-                } else if (newPerson.mutter != "") {
-                    var mutter = loop(data.stammbaum.familie, newPerson.mutter)
+                } else if (newPerson.mttr != "") {
+                    var mutter = loop(data.stammbaum.familie, newPerson.mttr)
                     if (mutter != undefined) {
                         for (let i = 0; i < data.stammbaum.familie[parseInt(mutter.familyId)].Person.length; i++) {
                             data.stammbaum.familie[parseInt(ehepartner.familyId)].Person.push(data.stammbaum.familie[parseInt(mutter.familyId)].Person[i])
@@ -79,8 +79,8 @@ function generatePerson(newPerson) {
                     } else {
                         alert("Fehler bei Ehepartner und Mutter")
                     }
-                } else if (newPerson.vater != "") {
-                    var vater = loop(data.stammbaum.familie, newPerson.vater)
+                } else if (newPerson.vtr != "") {
+                    var vater = loop(data.stammbaum.familie, newPerson.vtr)
                     if (vater != undefined) {
                         for (let i = 0; i < data.stammbaum.familie[parseInt(vater.familyId)].Person.length; i++) {
                             data.stammbaum.familie[parseInt(ehepartner.familyId)].Person.push(data.stammbaum.familie[parseInt(vater.familyId)].Person[i])

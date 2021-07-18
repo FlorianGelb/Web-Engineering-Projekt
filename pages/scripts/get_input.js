@@ -64,6 +64,8 @@ btn.onclick = function () {
     person2.todesdatum(document.getElementById("deathDate2").value);
     newPers.todesdatum(document.getElementById("deathDate").value);
 
+    newPers.id(Date.now());
+
 
     var pListe = Array.from(document.getElementsByClassName("content"));
 
@@ -77,7 +79,8 @@ btn.onclick = function () {
       checkIDs(np, person2);
 
   }
-  console.log(newPers);
+  console.log(JSON.stringify(newPers));
+  //generatePerson(newPers);
   posElement(person1.ID, person2.ID);
 }
 
