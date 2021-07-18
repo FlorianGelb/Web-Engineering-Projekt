@@ -30,6 +30,11 @@
             <br></br>
             <label for="familyName">Nachname:</label>
             <input type="text" id="familyName" name="familyName"></input>
+            <br></br>
+            <select id="Geschlecht">
+            <option value="männlich">Männlich</option>
+            <option value="weiblich">Weiblich</option>
+</select>
           </form>
         </div>
         <div class="div2">
@@ -200,13 +205,6 @@
                             </xsl:for-each>
                         </div>
                     </div>
-                    <script src="scripts/person.js"></script>
-                    <script src="scripts/relationships.js"></script>
-                    <script src="scripts/resizelogic.js"></script>
-                    <script src="scripts/get_input.js"></script>
-                    <script src="scripts/modalButton.js"></script>
-                    
-                    <script src="scripts/fittext.js"></script>
                 </div>
 
     <div>
@@ -404,6 +402,13 @@
                 </footer>
                 
             </body>
+                                <script src="scripts/person.js"></script>
+                    <script src="scripts/relationships.js"></script>
+                    <script src="scripts/resizelogic.js"></script>
+                    <script src="scripts/get_input.js"></script>
+                    <script src="scripts/modalButton.js"></script>
+                    
+                    <script src="scripts/fittext.js"></script>
         </html>
     </xsl:template>
 </xsl:stylesheet>
