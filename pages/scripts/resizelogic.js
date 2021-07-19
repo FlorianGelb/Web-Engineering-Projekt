@@ -104,6 +104,14 @@ function getRelation(firstPersonId, secondPersonId){
             secondPersonIndex = personObjectList.length - 1;
         }
     }
+    
+    if (personObjectList[firstPersonIndex].ehepartner =="" && personObjectList[firstPersonIndex].mutter == "" &&  personObjectList[firstPersonIndex].vater == ""){
+        return "keine Datenlage";
+    }
+    if (personObjectList[secondPersonIndex].ehepartner =="" && personObjectList[secondPersonIndex].mutter == "" &&  personObjectList[secondPersonIndex].vater == ""){
+        return "keine Datenlage";
+    }
+
     if (personObjectList[firstPersonIndex].ehepartner == personObjectList[secondPersonIndex].id){
         return "Ehepartner";
     }
@@ -123,6 +131,7 @@ function getRelation(firstPersonId, secondPersonId){
     }
     else if (personObjectList[firstPersonIndex].mutter == personObjectList[secondPersonIndex].mutter && personObjectList[firstPersonIndex].vater == personObjectList[secondPersonIndex].vater) {
         if (personObjectList[secondPersonIndex].geschlecht == "männlich"){
+            console.log(personObjectList[firstPersonIndex]);
             return "Bruder";
         }
         else {
