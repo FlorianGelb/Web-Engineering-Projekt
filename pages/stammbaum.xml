@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="stammbaum2.xsl"?>
+<?xml-stylesheet type="text/xsl" href="stammbaum.xsl"?>
 <!DOCTYPE stammbaum [
 <!ELEMENT stammbaum (Person)*>
 <!ELEMENT Person EMPTY>
@@ -61,4 +61,4 @@
             <Person vorname="nichtArthur" nachname="Ewing" geschlecht="männlich" geburtsdatum="1958-07-20" geburtsort="Pereira" todesdatum="" ehepartner="16" mutter="" vater="" id="300"/>
             <Person vorname="nichtKylee" nachname="Lee" geschlecht="weiblich" geburtsdatum="1998-12-16" geburtsort="Acireale" todesdatum="" ehepartner="15" mutter="5" vater="6" id="400"/>
 
-</stammbaum>
+<Person vorname="fasdf" nachname="" geschlecht="männlich" geburtsdatum="" geburtsort="" todesdatum="" ehepartner="" mutter="" vater="" id="1626710744751"/><Person vorname="gg" nachname="" geschlecht="männlich" geburtsdatum="" geburtsort="" todesdatum="" ehepartner="" mutter="" vater="" id="1626710843274"/></stammbaum>

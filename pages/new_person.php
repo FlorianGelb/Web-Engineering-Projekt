@@ -1,9 +1,5 @@
 <html>
 <body>
-
-<h1>Welcome to my home page!</h1>
-<p>Some text.</p>
-<p>Some more text.</p>
 <?php
         $file = 'stammbaum.xml'; 
 
@@ -57,6 +53,17 @@
             if(get_person_by_id($person->ID) != NULL){
                 return true;
             }
+
+                $empty = true;
+                foreach(array_slice(get_object_vars ($person), 0, 8) as $entry)
+                {
+                    $empty = ($empty and $entry == "");
+                    var_dump($empty);
+                }
+            if($empty){
+                return true;                
+            }
+
                 foreach($xml->Person as $pers){
                     $status = true;
                     $pers_slice = array_slice(get_object_vars ($pers)["@attributes"], 0, 9);
@@ -91,12 +98,6 @@
             }
             
             write_to_xml($xml, $person);
-
-            $dom = new DOMDocument("1.0");
-            $dom->preserveWhiteSpace = false;
-            $dom->formatOutput = true;
-            $dom->loadXML($xml);
-            $xml = $dom->saveXML();
 
             $xml->asXML($file);            
         }
