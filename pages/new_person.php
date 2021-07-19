@@ -58,7 +58,6 @@
                 foreach(array_slice(get_object_vars ($person), 0, 8) as $entry)
                 {
                     $empty = ($empty and $entry == "");
-                    var_dump($empty);
                 }
             if($empty){
                 return true;                
