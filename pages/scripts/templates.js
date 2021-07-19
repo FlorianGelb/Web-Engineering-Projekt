@@ -4,7 +4,7 @@
    const team = document.getElementsByClassName("team");
    const stammbaum = document.getElementsByClassName("stammbaum");
    const copyright = document.getElementsByClassName("copyright");
-   const resize = document.getElementsByClassName("resize");
+   const res = document.getElementsByClassName("resize");
    const link = document.getElementsByClassName("link");
    const ddc = document.getElementsByClassName("ddc");
 
@@ -53,8 +53,8 @@ function greyTheme() {
 
      
       
-      if (resize.length != 0) {
-        resize[0].style.backgroundColor = "#A8A8A8";
+      if (res.length != 0) {
+        res[0].style.backgroundColor = "#A8A8A8";
         document.body.style.backgroundColor = "#F6F6F6";
       }
       
@@ -103,8 +103,8 @@ function greyTheme() {
     
       document.getElementById("dropbtn").style.color = "black";
 
-      if (resize.length != 0) {
-        resize[0].style.backgroundColor = "#005A87";
+      if (res.length != 0) {
+        res[0].style.backgroundColor = "#005A87";
         document.body.style.backgroundColor = "#edfdff";
       }
  
@@ -154,8 +154,8 @@ function greyTheme() {
       document.getElementById("templateActive").style.backgroundColor = "#5E393A";
       document.getElementById("dropbtn").style.color = "black";
 
-      if (resize.length != 0) {
-        resize[0].style.backgroundColor = "#5E393A";
+      if (res.length != 0) {
+        res[0].style.backgroundColor = "#5E393A";
         document.body.style.backgroundColor = "#ece1d9";
       }
  
@@ -211,8 +211,8 @@ function greyTheme() {
       document.getElementById("templateActive").style.backgroundColor = "#04aa6d";
       document.getElementById("dropbtn").style.color = "white";
 
-      if (resize.length != 0) {
-        resize[0].style.backgroundColor = "burlywood";
+      if (res.length != 0) {
+        res[0].style.backgroundColor = "burlywood";
         document.body.style.backgroundColor = "#ebfaee";
       }
  
