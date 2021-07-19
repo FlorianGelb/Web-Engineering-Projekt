@@ -5,13 +5,9 @@
     <xsl:template match = "/stammbaum">
         <html>
             <head>
-                <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+                 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
                 <link rel="stylesheet" href="styles/styles.css" type="text/css" />
                 <link rel="stylesheet" href="styles/modalStyle.css" type="text/css" />
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
                 <link rel="stylesheet" href="styles/stammbaum.css" type="text/css" />
             </head>
             <body style="text-align: center">
@@ -103,18 +99,22 @@
   </div>
 
 
+
                 <header>
-                    <ul class="navbar">
-                        <li>
-                            <a class="active" href="index.html">Home</a>
-                        </li>
-                        <li>
-                            <a href="stammbaum.xml">Stammbaum</a>
-                        </li>
-                        <li style="float: right">
-                            <a href="stammbaum.xml">Platzhalter Option Icon</a>
-                        </li>
-                    </ul>
+                      <div id="templateNav" class="navbar">
+        <a class="active" href="index.html" id="templateActive">Home</a>
+        <a href="stammbaum.xml">Stammbaum</a>
+        <div class="dropdown" style="float: right;">
+           <button class="dropbtn" id="dropbtn">Templates 
+        </button>
+          <div class="dropdown-content">           
+              <a class="ddc" onclick="greyTheme()">Wolken</a>
+            <a class="ddc" onclick="seaTheme()">Strand</a>
+            <a class="ddc" onclick="brownTheme()">Holz</a>
+            <a class="ddc" onclick="blackGreenTheme()">Standart</a>
+          </div>
+        </div>
+      </div>
                 </header>
                 <div class="body">
                     <h2>Family Tree</h2>
@@ -399,12 +399,14 @@
                 </footer>
                 
             </body>
-                    <script src="scripts/person.js"></script>
+                  <script src="scripts/person.js"></script>
+                     <script language="javascript" type="text/javascript" src="scripts/templates.js"></script>
                     <script src="scripts/relationships.js"></script>
                     <script src="scripts/resizelogic.js"></script>
                     <script src="scripts/get_input.js"></script>
                     <script src="scripts/modalButton.js"></script>
                     <script src="scripts/fittext.js"></script>
+        </html>
         </html>
     </xsl:template>
 </xsl:stylesheet>
