@@ -4,92 +4,106 @@ const fs = require("fs");
 const { parseString, Builder } = require("xml2js");
 
 
-
-// load XML and parse to JSON
-const xml = fs.readFileSync("../stammbaum.xml").toString();
-parseString(xml, function (err, data) {
-
-
-    for (let i = 0; i < Object.keys(data.stammbaum.familie).length; i++) {
-     console.log(loop(data.stammbaum.familie[i].generation, '400'));
-      
-    }
-    
-
-
-
-
-});
-
 function compare(person, personID) {
     return person.$.id === personID;
 }
 
-function loop(generation, personID) {
-    var res = search(generation, personID);
-    if (res == undefined) {
-        if (generation[0].generation != undefined) {
-            return loop(generation[0].generation, personID)
-        } else {
-           
-            return;
+
+function loop(familie, personID) {
+    var res;
+    for (let i = 0; i < familie.length; i++) {
+        res = familie[i].Person.find(element => compare(element, personID));
+        if (res != undefined) {
+            return res;
         }
-
-    } else {
-        return res;
     }
+    return res;
 }
-
-function search(generation, personID) {
-    return generation[0].Person.find(element => compare(element, personID));
-   
-   
-}
-
-
 
 
 
 function generatePerson(newPerson) {
 
     // load XML and parse to JSON
-    const xml = fs.readFileSync("../xml-beispiel/dummydata.xml").toString();
+    const xml = fs.readFileSync("../stammbaum.xml").toString();
     parseString(xml, function (err, data) {
 
 
-        if(newPerson.mutter == "" && newPerson.vater == "" && newPerson.ehepartner == ""){
-
-        }else if(newPerson.mutter != "" ){
-            
+        if (newPerson.mttr == "" && newPerson.vtr == "" && newPerson.ehepartnr == "") {
+            var newFamile = { Person: [{ '$': { vorname: newPerson.vname, nachname: newPerson.nname, geschlecht: newPerson.gschlecht, geburtsdatum: newPerson.geburtsdat, geburtsort: newPerson.gebort, todesdatum: newPerson.todesdat, ehepartner: newPerson.ehepartnr, mutter: newPerson.mttr, vater: newPerson.vtr, id: newPerson.ID, familyId: toString(data.stammbaum.familie.length) } }] }
+            data.stammbaum.familie.push(newFamile);
+            saveXml(data);
+            return;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // Saved the XML
-        const builder = new Builder();
-        const xml = builder.buildObject(data);
-        fs.writeFileSync("dummydata.xml", xml, function (err, file) {
-            if (err) throw err;
-            console.log("Saved!");
-        });
+        // just mother
+        else if (newPerson.mttr != "" && newPerson.ehepartnr == "") {
+            var mutter = loop(data.stammbaum.familie, newPerson.mttr);
+            if (mutter != undefined) {
+                var personToPush = { '$': { vorname: newPerson.vname, nachname: newPerson.nname, geschlecht: newPerson.gschlecht, geburtsdatum: newPerson.geburtsdat, geburtsort: newPerson.gebort, todesdatum: newPerson.todesdat, ehepartner: newPerson.ehepartnr, mutter: newPerson.mttr, vater: newPerson.vtr, id: newPerson.ID, familyId: mutter.familyId } }
+                data.stammbaum.familie[parseInt(mutter.familyId)].Person.push(personToPush);
+                saveXml(data);
+                return;
+            } else {
+                alert("Die ausgewählte Mutter konnte nicht gefunden werden!");
+            }
+        }
+        // just father
+        else if (newPerson.vtr != "" && newPerson.ehepartnr == "") {
+            var vater = loop(data.stammbaum.familie, newPerson.vtr);
+            if (vater != undefined) {
+                var personToPush = { '$': { vorname: newPerson.vname, nachname: newPerson.nname, geschlecht: newPerson.gschlecht, geburtsdatum: newPerson.geburtsdat, geburtsort: newPerson.gebort, todesdatum: newPerson.todesdat, ehepartner: newPerson.ehepartnr, mutter: newPerson.mttr, vater: newPerson.vtr, id: newPerson.ID, familyId: vater.familyId } }
+                data.stammbaum.familie[parseInt(vater.familyId)].Person.push(personToPush);
+                saveXml(data);
+                return;
+            } else {
+                alert("Der ausgewählte Vater konnte nicht gefunden werden!");
+            }
+        }
+        else if (newPerson.ehepartnr != "") {
+            var ehepartner = loop(data.stammbaum.familie, newPerson.ehepartnr);
+            if (ehepartner != undefined) {
+                if (newPerson.mttr == "" && newPerson.vtr == "") {
+                    var personToPush = { '$': { vorname: newPerson.vname, nachname: newPerson.nname, geschlecht: newPerson.gschlecht, geburtsdatum: newPerson.geburtsdat, geburtsort: newPerson.gebort, todesdatum: newPerson.todesdat, ehepartner: newPerson.ehepartnr, mutter: newPerson.mttr, vater: newPerson.vtr, id: newPerson.ID, familyId: vater.familyId } }
+                    data.stammbaum.familie[parseInt(ehepartner.familyId)].Person.push(personToPush);
+                    saveXml(data);
+                    return;
+                } else if (newPerson.mttr != "") {
+                    var mutter = loop(data.stammbaum.familie, newPerson.mttr)
+                    if (mutter != undefined) {
+                        for (let i = 0; i < data.stammbaum.familie[parseInt(mutter.familyId)].Person.length; i++) {
+                            data.stammbaum.familie[parseInt(ehepartner.familyId)].Person.push(data.stammbaum.familie[parseInt(mutter.familyId)].Person[i])
+                        }
+                        delete data.stammbaum.familie[parseInt(mutter.familyId)];
+                        saveXml(data);
+                        return;
+                    } else {
+                        alert("Fehler bei Ehepartner und Mutter")
+                    }
+                } else if (newPerson.vtr != "") {
+                    var vater = loop(data.stammbaum.familie, newPerson.vtr)
+                    if (vater != undefined) {
+                        for (let i = 0; i < data.stammbaum.familie[parseInt(vater.familyId)].Person.length; i++) {
+                            data.stammbaum.familie[parseInt(ehepartner.familyId)].Person.push(data.stammbaum.familie[parseInt(vater.familyId)].Person[i])
+                        }
+                        delete data.stammbaum.familie[parseInt(vater.familyId)];
+                        saveXml(data);
+                        return;
+                    } else {
+                        alert("Fehler bei Ehepartner und Vater")
+                    }
+                }
+            } else {
+                alert("Der ausgewählte Ehepartner konnte nicht gefunden werden");
+            }
+        }
     });
-
 }
 
-
-
-
-
+function saveXml(data) {
+    const builder = new Builder();
+    const xml = builder.buildObject(data);
+    fs.writeFileSync("../stammbaum.xml", xml, function (err, file) {
+        if (err) throw err;
+        console.log("Saved!");
+    });
+}

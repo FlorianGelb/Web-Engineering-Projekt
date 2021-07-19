@@ -1,5 +1,6 @@
 
 var btn = document.getElementById("conf");
+var bst = document.getElementById("bst");
 
 var person1 = new Person();
 var person2 = new Person();
@@ -25,44 +26,68 @@ function checkIDs(pers, spers){
 
 }
 
+bst.onclick = function (){
+  newPers.ehepartner(document.getElementById("spouse").value);
+  newPers.vater(document.getElementById("father").value);
+  newPers.mutter(document.getElementById("mother").value);
+  newPers.nachname(document.getElementById("familyName").value);
+  newPers.vorname(document.getElementById("firstName").value);
+  newPers.todesdatum(document.getElementById("deathDate").value);
+  newPers.geburtsort(document.getElementById("birthPlace").value);
+  newPers.geburtsdatum(document.getElementById("birthdate").value);
+  newPers.geschlecht(document.getElementById("Geschlecht").value)
+
+  newPers.id(Date.now());
+
+  console.log(JSON.stringify(newPers));
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", "new_person.php/?json=" + JSON.stringify(newPers), false ); // false for synchronous request
+  xmlHttp.send( null );
+  console.log(xmlHttp.responseText);
+
+  location.reload();
+  modal.style.display = "none";
+
+}
+
 
 btn.onclick = function () {
 
     
     person1.vorname(document.getElementById("firstName1").value);
     person2.vorname(document.getElementById("firstName2").value);
-    newPers.vorname(document.getElementById("firstName").value);
 
-    newPers.geschlecht(document.getElementById("Geschlecht").value)
+
+
 
     person1.nachname(document.getElementById("familyName1").value);
     person2.nachname(document.getElementById("familyName2").value);
-    newPers.nachname(document.getElementById("familyName").value);
+
 
     person1.mutter(document.getElementById("mother1").value);
     person2.mutter(document.getElementById("mother2").value);
-    newPers.mutter(document.getElementById("mother").value);
+
     
 
     person1.vater(document.getElementById("father1").value);
     person2.vater(document.getElementById("father2").value);
-    newPers.vater(document.getElementById("father").value);
+
 
     person1.ehepartner(document.getElementById("spouse1").value);
     person2.ehepartner(document.getElementById("spouse2").value);
-    newPers.ehepartner(document.getElementById("spouse").value);
+
 
     person1.geburtsort(document.getElementById("birthPlace1").value);
     person2.geburtsort(document.getElementById("birthPlace2").value);
-    newPers.geburtsort(document.getElementById("birthPlace").value);
+
 
     person1.geburtsdatum(document.getElementById("birthdate1").value);
     person2.geburtsdatum(document.getElementById("birthdate2").value);
-    newPers.geburtsdatum(document.getElementById("birthdate").value);
+
 
     person1.todesdatum(document.getElementById("deathDate1").value);
     person2.todesdatum(document.getElementById("deathDate2").value);
-    newPers.todesdatum(document.getElementById("deathDate").value);
+
 
 
     var pListe = Array.from(document.getElementsByClassName("content"));
@@ -77,7 +102,7 @@ btn.onclick = function () {
       checkIDs(np, person2);
 
   }
-  console.log(newPers);
+
   posElement(person1.ID, person2.ID);
 }
 
