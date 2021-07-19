@@ -5,7 +5,7 @@
 <p>Some text.</p>
 <p>Some more text.</p>
 <?php
-        $file = 'test.xml'; 
+        $file = 'stammbaum.xml'; 
 
         
         $name = $_GET["json"];
@@ -19,44 +19,65 @@
        function get_family_by_id($id){
         global $xml;
         foreach($xml->familie as $fam){
-            if($fam->Person[0]["id"] == $id){
+            if($xml->Person[0]["id"] == $id){
                 return($fam);
             }
             
         }
        }
        
+
        function get_person_by_id($id){
             global $xml;
-            foreach($xml->familie as $fam){
-                foreach($fam->Person as $pers){
+                foreach($xml->Person as $pers){
                 if($pers->attributes()[9] == $id){
-                    //var_dump($pers);
                     return $pers;
                 }
             }
-        }
+        
         }
 
-        function write_to_xml($tag, $person, $case){
+        function write_to_xml($tag, $person){
             $pers = $tag->addChild('Person');
             $pers->addAttribute('vorname', $person->vname);
             $pers->addAttribute('nachname', $person->nname);
             $pers->addAttribute('geschlecht', $person->gschlecht);
-            $pers->addAttribute('geburtsdat', $person->geburtsdat);
+            $pers->addAttribute('geburtsdatum', $person->geburtsdat);
             $pers->addAttribute('geburtsort', $person->gebort);
             $pers->addAttribute('todesdatum', $person->todesdat);
             $pers->addAttribute('ehepartner', $person->ehepartnr);
             $pers->addAttribute('mutter', $person->mttr);
             $pers->addAttribute('vater', $person->vtr);
             $pers->addAttribute('id', $person->ID);
-            if($case == 0){
-                $pers->addAttribute('familyId', strval(time()));
+
+        }
+
+        function check_if_exists($person){
+            global $xml;
+            if(get_person_by_id($person->ID) != NULL){
+                return true;
             }
-            if($case == 1){
-                var_dump($tag->Person[0]["familyId"]);
-                $pers->addAttribute('familyId', $tag->Person[0]["familyId"]);
-                }
+                foreach($xml->Person as $pers){
+                    $status = true;
+                    $pers_slice = array_slice(get_object_vars ($pers)["@attributes"], 0, 9);
+                    $person_slice = array_slice(get_object_vars ($person), 0, 9);
+                    $status = ($status and $pers_slice["vorname"] == $person_slice["vname"]);
+                    $status = ($status and $pers_slice["nachname"] == $person_slice["nname"]);
+                    $status = ($status and $pers_slice["geschlecht"] == $person_slice["gschlecht"]);
+                    $status = ($status and $pers_slice["geburtsdatum"] == $person_slice["geburtsdat"]);
+                    $status = ($status and $pers_slice["geburtsort"] == $person_slice["gebort"]);
+                    $status = ($status and $pers_slice["todesdatum"] == $person_slice["todesdat"]);
+                    $status = ($status and $pers_slice["ehepartner"] == $person_slice["ehepartnr"]);
+                    $status = ($status and $pers_slice["mutter"] == $person_slice["mttr"]);
+                    $status = ($status and $pers_slice["vater"] == $person_slice["vtr"]);
+                    
+                    if($status){
+                        return $status;
+                    }
+                   
+            }
+        
+        return false;
 
         }
         
@@ -64,60 +85,21 @@
         function generate_person($person){
             global $file;
             global $xml;
-            //if(get_person_by_id($person->ID) != NULL){
-              //  return NULL;
-           // }
             
-            if($person->ehepartnr != "" and $person->mttr == "" and $person->vtr == ""){
-                $fam = get_family_by_id($person->ehepartnr);
-                write_to_xml($fam, $person, 1);
-
-           }
-
-           if($person->ehepartnr == "" and $person->mttr == "" and $person->vtr != ""){
-            $fam = get_family_by_id($person->vtr);
-            write_to_xml($fam, $person, 1);
-       }
-        
-           if($person->ehepartnr == "" and $person->mttr != "" and $person->vtr == ""){
-            $fam = get_family_by_id($person->mttr);
-            write_to_xml($fam, $person, 1);
-
-       }
-          
-
-            if($person->ehepartnr == "" and $person->mttr == "" and $person->vtr == ""){
- 
-                $familie = $xml->addChild('familie');
-                write_to_xml($familie, $person, 0);
-               /* $pers = $familie->addChild('Person');
-                $pers->addAttribute('vorname', $person->vname);
-                $pers->addAttribute('nachname', $person->nname);
-                $pers->addAttribute('geschlecht', $person->gschlecht);
-                $pers->addAttribute('geburtsdat', $person->geburtsdat);
-                $pers->addAttribute('geburtsort', $person->gebort);
-                $pers->addAttribute('todesdatum', $person->todesdat);
-                $pers->addAttribute('ehepartner', $person->ehepartnr);
-                $pers->addAttribute('mutter', $person->mttr);
-                $pers->addAttribute('vater', $person->vtr);
-                $pers->addAttribute('id', $person->ID);
-                $pers->addAttribute('familyId', strval(time()));
-                */
-                
+            if(check_if_exists($person)){
+                return;
             }
-            $xml->asXML($file);
-        
+            
+            write_to_xml($xml, $person);
+
+            $dom = new DOMDocument("1.0");
+            $dom->preserveWhiteSpace = false;
+            $dom->formatOutput = true;
+            $dom->loadXML($xml);
+            $xml = $dom->saveXML();
+
+            $xml->asXML($file);            
         }
-
-
-        
-
-
-        
-        
-
-       
-
 ?>
 
 </body>

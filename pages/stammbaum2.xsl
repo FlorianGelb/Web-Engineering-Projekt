@@ -120,8 +120,7 @@
                     <h2>Family Tree</h2>
                     <div class="resizecontainer">
                         <div class="resize">
-                            <xsl:for-each select = "//familie">
-                                    <xsl:for-each select = "Person">
+                            <xsl:for-each select = "Person">
                                         <div class="content" style="top: 300px; left:100px;"> 
                                             <xsl:attribute name="data-geschlecht"><xsl:value-of select="@geschlecht"/></xsl:attribute>
                                             <xsl:attribute name="data-vorname"><xsl:value-of select="@vorname"/></xsl:attribute>
@@ -201,7 +200,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </xsl:for-each>
                             </xsl:for-each>
                         </div>
                     </div>

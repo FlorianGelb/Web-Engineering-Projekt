@@ -80,6 +80,12 @@ btn.onclick = function () {
 
   }
   console.log(JSON.stringify(newPers));
+
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", "http://127.0.0.1:1111/test.php/?json=" + JSON.stringify(newPers), false ); // false for synchronous request
+  xmlHttp.send( null );
+  console.log(xmlHttp.responseText);
+
   //generatePerson(newPers);
   posElement(person1.ID, person2.ID);
 }
