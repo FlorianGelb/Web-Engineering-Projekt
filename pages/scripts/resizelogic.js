@@ -105,12 +105,17 @@ function getRelation(firstPersonId, secondPersonId){
         }
     }
     
+    if(firstPersonIndex != undefined && secondPersonIndex != undefined){
     if (personObjectList[firstPersonIndex].ehepartner =="" && personObjectList[firstPersonIndex].mutter == "" &&  personObjectList[firstPersonIndex].vater == ""){
+        console.log(firstPersonIndex)
+        console.log(secondPersonIndex)
         return "keine Datenlage";
+        
     }
     if (personObjectList[secondPersonIndex].ehepartner =="" && personObjectList[secondPersonIndex].mutter == "" &&  personObjectList[secondPersonIndex].vater == ""){
         return "keine Datenlage";
     }
+}
 
     if (personObjectList[firstPersonIndex].ehepartner == personObjectList[secondPersonIndex].id){
         return "Ehepartner";
